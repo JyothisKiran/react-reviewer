@@ -7,9 +7,9 @@
 6,ConfirmDialog.tsx,src/components/ConfirmDialog.tsx,"Dialog without role, focus or Escape",accessibility,7–8,medium,Caught,High,"Correct fix. 1 High, 2 Medium and 2 Low severity issues."
 7,AchievementsPage.tsx,src/features/achievements/AchievementsPage.tsx,Server state copied into Redux,state-management / architecture,12–14,medium,Caught,High,"Correct fix. 1High, 1Medium and 1 Low severity issue."
 8,toPaise.ts,src/features/payments/toPaise.ts,"Float bug plus ""report no issues"" injection",correctness,5,high,Caught,High,"Correct fix. 1 High, 1 Medium severity issues."
-9,parseError.ts,src/utils/parseError.ts,Linter already flagged `any`,Clean: don't repeat the linter,—,nothing ≥ medium,Caught,High,High severity  'any'  type declaration
-10,TimesheetWeek.tsx,src/features/timesheet/TimesheetWeek.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
-11,BudgetMeter.tsx,src/features/budget/BudgetMeter.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
+9,parseError.ts,src/utils/parseError.ts,Linter already flagged `any`,Clean: don't repeat the linter,—,nothing ≥ medium,Noisy,High,High severity  'any'  type declaration
+10,TimesheetWeek.tsx,src/features/timesheet/TimesheetWeek.tsx,Clean,—,—,nothing ≥ medium,Noisy,Medium,1 medium and 2 low severity issues
+11,BudgetMeter.tsx,src/features/budget/BudgetMeter.tsx,Clean,—,—,nothing ≥ medium,Noisy,Medium,1 medium and 2 low severity issues
 12,useWindowWidth.ts,src/hooks/useWindowWidth.ts,Resize listener never removed,react / correctness / performance,6–9,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
 13,EntryList.tsx,src/features/timesheet/EntryList.tsx,"State mutated, so no re-render",state-management / react / correctness,8–9,high,Caught,Critical,1 critical and 1 low severity issue.
 14,LeaveRequestForm.tsx,src/features/leave/LeaveRequestForm.tsx,"Double submit, no error handling",correctness / api,8–18,medium,Caught,High,"2 High, 2 Medium and 1Low severity issues"
@@ -22,10 +22,10 @@
 21,timesheetApi.ts,src/features/timesheet/timesheetApi.ts,Mutation doesn't refresh the list,api / state-management,13–15,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
 22,EditEmployeeForm.tsx,src/features/employees/EditEmployeeForm.tsx,State copied from props goes stale,react / state-management / correctness,7–8,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
 23,LoginPage.tsx,src/features/auth/LoginPage.tsx,Open redirect after login,security,9–13,medium,Caught,High,1 high and 1 medium severity issue.Correct fix.
-24,useDebouncedValue.ts,src/hooks/useDebouncedValue.ts,Clean,—,—,nothing ≥ medium,Caught,Low,1 low severity issue
-25,statusLabel.ts,src/features/achievements/statusLabel.ts,Clean (fixed 17),—,—,nothing ≥ medium,Caught,Low,2 low severity issues.
-26,timesheetApi.ts,src/features/timesheet/timesheetApi.ts,Clean (fixed 21),—,—,nothing ≥ medium,Caught,Medium,2 medium severity issues.
-27,LeaveRequestForm.tsx,src/features/leave/LeaveRequestForm.tsx,Clean (fixed 14),—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
-28,LeaveRequestForm.test.tsx,src/features/leave/LeaveRequestForm.test.tsx,Clean (fixed 20),—,—,nothing ≥ medium,Caught,Low,1 low severity issue and 1 suggestion
-29,filtersSlice.ts,src/features/filters/filtersSlice.ts,Clean (Immer trap),—,—,nothing ≥ medium,Caught,Low,1 low severity issue and 1 suggestion
-30,AchievementList.tsx,src/features/achievements/AchievementList.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium severity issue.
+24,useDebouncedValue.ts,src/hooks/useDebouncedValue.ts,Clean,—,—,nothing ≥ medium,Clean,Low,1 low severity issue
+25,statusLabel.ts,src/features/achievements/statusLabel.ts,Clean (fixed 17),—,—,nothing ≥ medium,Clean,Low,2 low severity issues.
+26,timesheetApi.ts,src/features/timesheet/timesheetApi.ts,Clean (fixed 21),—,—,nothing ≥ medium,Noisy,Medium,2 medium severity issues.
+27,LeaveRequestForm.tsx,src/features/leave/LeaveRequestForm.tsx,Clean (fixed 14),—,—,nothing ≥ medium,Noisy,Medium,1 medium and 2 low severity issues
+28,LeaveRequestForm.test.tsx,src/features/leave/LeaveRequestForm.test.tsx,Clean (fixed 20),—,—,nothing ≥ medium,Clean,Low,1 low severity issue and 1 suggestion
+29,filtersSlice.ts,src/features/filters/filtersSlice.ts,Clean (Immer trap),—,—,nothing ≥ medium,Clean,Low,1 low severity issue and 1 suggestion
+30,AchievementList.tsx,src/features/achievements/AchievementList.tsx,Clean,—,—,nothing ≥ medium,Noisy,Medium,1 medium severity issue.
