@@ -1,0 +1,11 @@
+import { TrashIcon } from "@/components/icons";
+
+type Props = { onDelete: () => void };
+
+export function DeleteEntryButton({ onDelete }: Props) {
+  return (
+    <button type="button" onClick={onDelete} className="p-1 text-gray-500 hover:text-red-600">
+      <TrashIcon className="h-4 w-4" />
+    </button>
+  );
+}

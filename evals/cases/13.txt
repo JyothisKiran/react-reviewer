@@ -1,0 +1,18 @@
+import { useState } from "react";
+import type { Entry } from "./types";
+
+export function EntryList({ initialEntries }: { initialEntries: Entry[] }) {
+  const [entries, setEntries] = useState(initialEntries);
+
+  function addBlankEntry() {
+    entries.push({ id: crypto.randomUUID(), project: "", hours: 0 });
+    setEntries(entries);
+  }
+
+  return (
+    <div>
+      <p>{entries.length} entries</p>
+      <button type="button" onClick={addBlankEntry}>Add entry</button>
+    </div>
+  );
+}

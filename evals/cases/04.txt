@@ -1,0 +1,8 @@
+import type { Employee } from "../types";
+
+type Props = { employees: Employee[]; selectedId: string };
+
+export function SelectedEmployee({ employees, selectedId }: Props) {
+  const employee = employees.find((e) => e.id === selectedId)!;
+  return <p>{employee.name}</p>;
+}

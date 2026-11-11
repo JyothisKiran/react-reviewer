@@ -1,0 +1,20 @@
+import type { Achievement } from "./types";
+
+type Props = { items: Achievement[] };
+
+export function AchievementList({ items }: Props) {
+  if (items.length === 0) {
+    return <p>No achievements submitted yet.</p>;
+  }
+
+  return (
+    <ul className="divide-y">
+      {items.map((item) => (
+        <li key={item.id} className="py-3">
+          <h3 className="font-bold">{item.title}</h3>
+          <p>{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}

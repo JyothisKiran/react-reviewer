@@ -1,0 +1,10 @@
+export type ApprovalStatus = "pending" | "approved" | "rejected";
+
+export function statusLabel(status: ApprovalStatus) {
+  switch (status) {
+    case "approved":
+      return "Approved";
+    case "rejected":
+      return "Rejected";
+  }
+}

@@ -1,0 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetAchievementsQuery } from "./achievementsApi";
+import { setAchievements, selectAchievements } from "./achievementsSlice";
+import { AchievementList } from "./AchievementList";
+
+export function AchievementsPage() {
+  const dispatch = useDispatch();
+  const { data } = useGetAchievementsQuery();
+  const achievements = useSelector(selectAchievements);
+
+  useEffect(() => {
+    if (data) dispatch(setAchievements(data));
+  }, [data, dispatch]);
+
+  return <AchievementList items={achievements} />;
+}

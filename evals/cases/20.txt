@@ -1,0 +1,18 @@
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { expect, it, vi } from "vitest";
+import { LeaveRequestForm } from "./LeaveRequestForm";
+import { submitLeaveRequest } from "./leaveApi";
+
+vi.mock("./leaveApi");
+
+it("shows a confirmation after sending", async () => {
+  const user = userEvent.setup();
+  vi.mocked(submitLeaveRequest).mockResolvedValue(undefined);
+  render(<LeaveRequestForm />);
+
+  await user.type(screen.getByLabelText("Reason"), "Family function");
+  await user.click(screen.getByRole("button", { name: "Send request" }));
+
+  waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Leave request sent."));
+});

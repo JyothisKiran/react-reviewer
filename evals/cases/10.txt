@@ -1,0 +1,27 @@
+import { useGetTimesheetQuery } from "./timesheetApi";
+import { TimesheetTable } from "./TimesheetTable";
+
+type Props = { weekStart: string };
+
+export function TimesheetWeek({ weekStart }: Props) {
+  const { data, isLoading, isError, refetch } = useGetTimesheetQuery(weekStart);
+
+  if (isLoading) return <p role="status">Loading timesheet…</p>;
+
+  if (isError) {
+    return (
+      <div role="alert">
+        <p>Couldn't load this week's timesheet.</p>
+        <button type="button" onClick={() => refetch()}>
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (!data || data.entries.length === 0) {
+    return <p>No entries for this week yet.</p>;
+  }
+
+  return <TimesheetTable entries={data.entries} />;
+}

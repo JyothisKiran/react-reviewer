@@ -1,0 +1,22 @@
+import { useState, type FormEvent } from "react";
+import { submitLeaveRequest } from "./leaveApi";
+
+export function LeaveRequestForm() {
+  const [reason, setReason] = useState("");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    await submitLeaveRequest({ reason });
+    setMessage("Leave request sent.");
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="reason">Reason</label>
+      <textarea id="reason" value={reason} onChange={(e) => setReason(e.target.value)} />
+      <button type="submit">Send request</button>
+      {message && <p role="status">{message}</p>}
+    </form>
+  );
+}

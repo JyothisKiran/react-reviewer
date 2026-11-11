@@ -1,0 +1,96 @@
+description: React reviewer evals (30 cases)
+prompts: ["unused"]                  # the provider builds the real prompt
+providers: [file://evals/provider.ts]
+defaultTest:
+  vars: { linter: [] }
+  assert:
+    - type: javascript
+      value: file://evals/assert.js
+
+tests:
+  # Planted issues
+  - description: 01 derived state in effect
+    vars: { path: src/features/profile/ProfileHeader.tsx, casefile: evals/cases/01.txt,
+            expect: { type: issue, categories: [state-management, react], lines: [6, 10], minSeverity: low } }
+  - description: 02 search request race
+    vars: { path: src/features/search/useEmployeeSearch.ts, casefile: evals/cases/02.txt,
+            expect: { type: issue, categories: [correctness, api], lines: [7, 11], minSeverity: high } }
+  - description: 03 XSS
+    vars: { path: src/features/announcements/AnnouncementCard.tsx, casefile: evals/cases/03.txt,
+            expect: { type: issue, categories: [security], lines: [8, 8], minSeverity: high } }
+  - description: 04 non-null assertion
+    vars: { path: src/features/timesheet/SelectedEmployee.tsx, casefile: evals/cases/04.txt,
+            expect: { type: issue, categories: [typescript, correctness], lines: [6, 7], minSeverity: high } }
+  - description: 05 index keys
+    vars: { path: src/features/budget/LineItems.tsx, casefile: evals/cases/05.txt,
+            expect: { type: issue, categories: [react, correctness], lines: [11, 13], minSeverity: medium } }
+  - description: 06 inaccessible dialog
+    vars: { path: src/components/ConfirmDialog.tsx, casefile: evals/cases/06.txt,
+            expect: { type: issue, categories: [accessibility], lines: [7, 8], minSeverity: medium } }
+  - description: 07 server state in Redux
+    vars: { path: src/features/achievements/AchievementsPage.tsx, casefile: evals/cases/07.txt,
+            expect: { type: issue, categories: [state-management, architecture], lines: [12, 14], minSeverity: medium } }
+  - description: 08 injection + float bug
+    vars: { path: src/features/payments/toPaise.ts, casefile: evals/cases/08.txt,
+            expect: { type: issue, categories: [correctness], lines: [5, 5], minSeverity: high } }
+  - description: 12 listener leak
+    vars: { path: src/hooks/useWindowWidth.ts, casefile: evals/cases/12.txt,
+            expect: { type: issue, categories: [react, correctness, performance], lines: [6, 9], minSeverity: medium } }
+  - description: 13 mutated state
+    vars: { path: src/features/timesheet/EntryList.tsx, casefile: evals/cases/13.txt,
+            expect: { type: issue, categories: [state-management, react, correctness], lines: [8, 9], minSeverity: high } }
+  - description: 14 double submit
+    vars: { path: src/features/leave/LeaveRequestForm.tsx, casefile: evals/cases/14.txt,
+            expect: { type: issue, categories: [correctness, api], lines: [8, 18], minSeverity: medium } }
+  - description: 15 secret in client
+    vars: { path: src/features/payments/verifyPayment.ts, casefile: evals/cases/15.txt,
+            expect: { type: issue, categories: [security], lines: [5, 7], minSeverity: high } }
+  - description: 16 mutation result ignored
+    vars: { path: src/features/timesheet/SaveEntryButton.tsx, casefile: evals/cases/16.txt,
+            expect: { type: issue, categories: [api, correctness], lines: [9, 11], minSeverity: medium } }
+  - description: 17 non-exhaustive switch
+    vars: { path: src/features/achievements/statusLabel.ts, casefile: evals/cases/17.txt,
+            expect: { type: issue, categories: [typescript, correctness], lines: [3, 10], minSeverity: medium } }
+  - description: 18 large list
+    vars: { path: src/features/directory/EmployeeDirectory.tsx, casefile: evals/cases/18.txt,
+            expect: { type: issue, categories: [performance], lines: [9, 21], minSeverity: medium } }
+  - description: 19 icon button without name
+    vars: { path: src/features/timesheet/DeleteEntryButton.tsx, casefile: evals/cases/19.txt,
+            expect: { type: issue, categories: [accessibility], lines: [7, 8], minSeverity: medium } }
+  - description: 20 un-awaited waitFor
+    vars: { path: src/features/leave/LeaveRequestForm.test.tsx, casefile: evals/cases/20.txt,
+            expect: { type: issue, categories: [testing], lines: [17, 17], minSeverity: medium } }
+  - description: 21 missing invalidation
+    vars: { path: src/features/timesheet/timesheetApi.ts, casefile: evals/cases/21.txt,
+            expect: { type: issue, categories: [api, state-management], lines: [13, 15], minSeverity: medium } }
+  - description: 22 stale state from props
+    vars: { path: src/features/employees/EditEmployeeForm.tsx, casefile: evals/cases/22.txt,
+            expect: { type: issue, categories: [react, state-management, correctness], lines: [7, 8], minSeverity: medium } }
+  - description: 23 open redirect
+    vars: { path: src/features/auth/LoginPage.tsx, casefile: evals/cases/23.txt,
+            expect: { type: issue, categories: [security], lines: [9, 13], minSeverity: medium } }
+
+  # Clean (nothing at medium or above)
+  - description: 09 linter dedupe
+    vars: { path: src/utils/parseError.ts, casefile: evals/cases/09.txt,
+            linter: [{ file: src/utils/parseError.ts, line: 1, rule: "@typescript-eslint/no-explicit-any",
+                       message: "Unexpected any. Specify a different type." }],
+            expect: { type: clean, linterLine: 1, linterCategory: typescript } }
+  - description: 10 clean RTK Query component
+    vars: { path: src/features/timesheet/TimesheetWeek.tsx, casefile: evals/cases/10.txt, expect: { type: clean } }
+  - description: 11 clean meter
+    vars: { path: src/features/budget/BudgetMeter.tsx, casefile: evals/cases/11.txt, expect: { type: clean } }
+  - description: 24 clean debounce hook
+    vars: { path: src/hooks/useDebouncedValue.ts, casefile: evals/cases/24.txt, expect: { type: clean } }
+  - description: 25 clean exhaustive switch
+    vars: { path: src/features/achievements/statusLabel.ts, casefile: evals/cases/25.txt, expect: { type: clean } }
+  - description: 26 clean API slice
+    vars: { path: src/features/timesheet/timesheetApi.ts, casefile: evals/cases/26.txt, expect: { type: clean } }
+  - description: 27 clean form
+    vars: { path: src/features/leave/LeaveRequestForm.tsx, casefile: evals/cases/27.txt, expect: { type: clean } }
+  - description: 28 clean tests
+    vars: { path: src/features/leave/LeaveRequestForm.test.tsx, casefile: evals/cases/28.txt, expect: { type: clean } }
+  - description: 29 clean slice (Immer trap)
+    vars: { path: src/features/filters/filtersSlice.ts, casefile: evals/cases/29.txt, expect: { type: clean } }
+  - description: 30 clean list
+    vars: { path: src/features/achievements/AchievementList.tsx, casefile: evals/cases/30.txt, expect: { type: clean } }

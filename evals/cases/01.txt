@@ -1,0 +1,13 @@
+import { useEffect, useState } from "react";
+
+type Props = { firstName: string; lastName: string };
+
+export function ProfileHeader({ firstName, lastName }: Props) {
+  const [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    setFullName(`${firstName} ${lastName}`);
+  }, [firstName, lastName]);
+
+  return <h1>{fullName}</h1>;
+}

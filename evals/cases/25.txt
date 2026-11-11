@@ -1,0 +1,16 @@
+export type ApprovalStatus = "pending" | "approved" | "rejected";
+
+export function statusLabel(status: ApprovalStatus): string {
+  switch (status) {
+    case "pending":
+      return "Waiting for approval";
+    case "approved":
+      return "Approved";
+    case "rejected":
+      return "Rejected";
+    default: {
+      const unhandled: never = status;
+      throw new Error(`Unhandled status: ${unhandled}`);
+    }
+  }
+}

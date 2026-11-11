@@ -1,0 +1,11 @@
+type Props = { title: string; bodyHtml: string };
+
+// bodyHtml comes from the announcements API and is written by employees
+export function AnnouncementCard({ title, bodyHtml }: Props) {
+  return (
+    <article>
+      <h2>{title}</h2>
+      <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+    </article>
+  );
+}

@@ -1,0 +1,19 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { Entry, NewEntry } from "./types";
+
+export const timesheetApi = createApi({
+  reducerPath: "timesheetApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  tagTypes: ["Entry"],
+  endpoints: (build) => ({
+    getEntries: build.query<Entry[], string>({
+      query: (weekStart) => `/entries?week=${weekStart}`,
+      providesTags: ["Entry"],
+    }),
+    addEntry: build.mutation<Entry, NewEntry>({
+      query: (body) => ({ url: "/entries", method: "POST", body }),
+    }),
+  }),
+});
+
+export const { useGetEntriesQuery, useAddEntryMutation } = timesheetApi;

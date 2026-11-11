@@ -1,0 +1,22 @@
+import { useState } from "react";
+import { useUpdateEntryMutation } from "./timesheetApi";
+import type { Entry } from "./types";
+
+export function SaveEntryButton({ entry }: { entry: Entry }) {
+  const [updateEntry, { isLoading }] = useUpdateEntryMutation();
+  const [saved, setSaved] = useState(false);
+
+  async function handleSave() {
+    await updateEntry(entry);
+    setSaved(true);
+  }
+
+  return (
+    <>
+      <button type="button" onClick={handleSave} disabled={isLoading}>
+        {isLoading ? "Saving…" : "Save"}
+      </button>
+      {saved && <p role="status">Saved</p>}
+    </>
+  );
+}

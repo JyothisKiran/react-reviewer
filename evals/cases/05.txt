@@ -1,0 +1,19 @@
+import { useState } from "react";
+
+type Item = { id: string; label: string };
+
+export function LineItems({ initial }: { initial: Item[] }) {
+  const [items, setItems] = useState(initial);
+  const remove = (id: string) => setItems((prev) => prev.filter((i) => i.id !== id));
+
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>
+          <input defaultValue={item.label} />
+          <button onClick={() => remove(item.id)}>Remove</button>
+        </li>
+      ))}
+    </ul>
+  );
+}

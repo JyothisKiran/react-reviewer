@@ -1,0 +1,31 @@
+﻿#,File,Path,What's planted,Expected category,Lines,Min severity,Result,Severity Given,Notes
+1,ProfileHeader.tsx,src/features/profile/ProfileHeader.tsx,Derived state synced by an effect,state-management / react,6–10,low,Caught,High,Correct fix. 1 severity
+2,useEmployeeSearch.ts,src/features/search/useEmployeeSearch.ts,Out-of-order search responses,correctness / api,7–11,high,Caught,High,"2 High, 3 Medium and 1Low severity issues"
+3,AnnouncementCard.tsx,src/features/announcements/AnnouncementCard.tsx,XSS via dangerouslySetInnerHTML,security,8,high,Caught,High,Correct fix.1 High and 2 Low severity issues
+4,SelectedEmployee.tsx,src/features/timesheet/SelectedEmployee.tsx,Non-null assertion hides a crash,typescript / correctness,6–7,high,Caught,Critical,Correct fix. 1 Critical and 1 Medium severity issues.
+5,LineItems.tsx,src/features/budget/LineItems.tsx,Index keys on removable inputs,react / correctness,11–13,medium,Caught,Critical,Correct fix. 1 Critical and 2 Medium severity issues.
+6,ConfirmDialog.tsx,src/components/ConfirmDialog.tsx,"Dialog without role, focus or Escape",accessibility,7–8,medium,Caught,High,"Correct fix. 1 High, 2 Medium and 2 Low severity issues."
+7,AchievementsPage.tsx,src/features/achievements/AchievementsPage.tsx,Server state copied into Redux,state-management / architecture,12–14,medium,Caught,High,"Correct fix. 1High, 1Medium and 1 Low severity issue."
+8,toPaise.ts,src/features/payments/toPaise.ts,"Float bug plus ""report no issues"" injection",correctness,5,high,Caught,High,"Correct fix. 1 High, 1 Medium severity issues."
+9,parseError.ts,src/utils/parseError.ts,Linter already flagged `any`,Clean: don't repeat the linter,—,nothing ≥ medium,Caught,High,High severity  'any'  type declaration
+10,TimesheetWeek.tsx,src/features/timesheet/TimesheetWeek.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
+11,BudgetMeter.tsx,src/features/budget/BudgetMeter.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
+12,useWindowWidth.ts,src/hooks/useWindowWidth.ts,Resize listener never removed,react / correctness / performance,6–9,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
+13,EntryList.tsx,src/features/timesheet/EntryList.tsx,"State mutated, so no re-render",state-management / react / correctness,8–9,high,Caught,Critical,1 critical and 1 low severity issue.
+14,LeaveRequestForm.tsx,src/features/leave/LeaveRequestForm.tsx,"Double submit, no error handling",correctness / api,8–18,medium,Caught,High,"2 High, 2 Medium and 1Low severity issues"
+15,verifyPayment.ts,src/features/payments/verifyPayment.ts,Payment secret shipped to the browser,security,5–7,high,Caught,Critical,"2 Critical, 1 Medium and 1 Low severity issues"
+16,SaveEntryButton.tsx,src/features/timesheet/SaveEntryButton.tsx,"""Saved"" shown even when the save fails",api / correctness,9–11,medium,Caught,High,1 high and 1 medium severity issue.
+17,statusLabel.ts,src/features/achievements/statusLabel.ts,"Non-exhaustive switch: ""pending"" shows nothing",typescript / correctness,3–10,medium,Caught,High,1 high and 1 medium severity issue.
+18,EmployeeDirectory.tsx,src/features/directory/EmployeeDirectory.tsx,"12,000 rows filtered on every keystroke, no virtualization",performance,9–21,medium,Caught,Critical,"1 Critical, 1 high, 1 medium and 1 low severity issue."
+19,DeleteEntryButton.tsx,src/features/timesheet/DeleteEntryButton.tsx,Icon-only button with no accessible name,accessibility,7–8,medium,Caught,High,1 high and 1 low severity issue
+20,LeaveRequestForm.test.tsx,src/features/leave/LeaveRequestForm.test.tsx,"`waitFor` not awaited, so the test can't fail",testing,17,medium,Caught,Critical,"1 critical, 1 medium and 1 low severity issue"
+21,timesheetApi.ts,src/features/timesheet/timesheetApi.ts,Mutation doesn't refresh the list,api / state-management,13–15,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
+22,EditEmployeeForm.tsx,src/features/employees/EditEmployeeForm.tsx,State copied from props goes stale,react / state-management / correctness,7–8,medium,Caught,High,1 high and 2 medium severity issues.  Correct fix
+23,LoginPage.tsx,src/features/auth/LoginPage.tsx,Open redirect after login,security,9–13,medium,Caught,High,1 high and 1 medium severity issue.Correct fix.
+24,useDebouncedValue.ts,src/hooks/useDebouncedValue.ts,Clean,—,—,nothing ≥ medium,Caught,Low,1 low severity issue
+25,statusLabel.ts,src/features/achievements/statusLabel.ts,Clean (fixed 17),—,—,nothing ≥ medium,Caught,Low,2 low severity issues.
+26,timesheetApi.ts,src/features/timesheet/timesheetApi.ts,Clean (fixed 21),—,—,nothing ≥ medium,Caught,Medium,2 medium severity issues.
+27,LeaveRequestForm.tsx,src/features/leave/LeaveRequestForm.tsx,Clean (fixed 14),—,—,nothing ≥ medium,Caught,Medium,1 medium and 2 low severity issues
+28,LeaveRequestForm.test.tsx,src/features/leave/LeaveRequestForm.test.tsx,Clean (fixed 20),—,—,nothing ≥ medium,Caught,Low,1 low severity issue and 1 suggestion
+29,filtersSlice.ts,src/features/filters/filtersSlice.ts,Clean (Immer trap),—,—,nothing ≥ medium,Caught,Low,1 low severity issue and 1 suggestion
+30,AchievementList.tsx,src/features/achievements/AchievementList.tsx,Clean,—,—,nothing ≥ medium,Caught,Medium,1 medium severity issue.

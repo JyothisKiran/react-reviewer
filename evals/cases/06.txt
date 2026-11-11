@@ -1,0 +1,15 @@
+type Props = { open: boolean; message: string; onConfirm: () => void; onCancel: () => void };
+
+export function ConfirmDialog({ open, message, onConfirm, onCancel }: Props) {
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50">
+      <div className="rounded bg-white p-6">
+        <p>{message}</p>
+        <button onClick={onCancel}>Cancel</button>
+        <button onClick={onConfirm}>Delete</button>
+      </div>
+    </div>
+  );
+}

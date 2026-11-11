@@ -1,0 +1,8 @@
+import { hmacSha256Hex } from "@/lib/crypto";
+
+// Called after Razorpay checkout succeeds, before showing the order as paid
+export async function verifyPayment(orderId: string, paymentId: string, signature: string) {
+  const secret = import.meta.env.VITE_RAZORPAY_KEY_SECRET;
+  const expected = await hmacSha256Hex(secret, `${orderId}|${paymentId}`);
+  return expected === signature;
+}

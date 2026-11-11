@@ -1,0 +1,30 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { expect, it, vi } from "vitest";
+import { LeaveRequestForm } from "./LeaveRequestForm";
+import { submitLeaveRequest } from "./leaveApi";
+
+vi.mock("./leaveApi");
+
+it("shows a confirmation after sending", async () => {
+  const user = userEvent.setup();
+  vi.mocked(submitLeaveRequest).mockResolvedValue(undefined);
+  render(<LeaveRequestForm />);
+
+  await user.type(screen.getByLabelText("Reason"), "Family function");
+  await user.click(screen.getByRole("button", { name: "Send request" }));
+
+  expect(await screen.findByRole("status")).toHaveTextContent("Leave request sent.");
+  expect(submitLeaveRequest).toHaveBeenCalledWith({ reason: "Family function" });
+});
+
+it("shows an error when sending fails", async () => {
+  const user = userEvent.setup();
+  vi.mocked(submitLeaveRequest).mockRejectedValue(new Error("Network down"));
+  render(<LeaveRequestForm />);
+
+  await user.type(screen.getByLabelText("Reason"), "Family function");
+  await user.click(screen.getByRole("button", { name: "Send request" }));
+
+  expect(await screen.findByRole("alert")).toHaveTextContent("Couldn't send your request");
+});

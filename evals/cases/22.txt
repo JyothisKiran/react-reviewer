@@ -1,0 +1,22 @@
+import { useState } from "react";
+import type { Employee } from "../types";
+
+type Props = { employee: Employee; onSave: (name: string) => void };
+
+// Rendered next to the employee list; switches when another employee is selected
+export function EditEmployeeForm({ employee, onSave }: Props) {
+  const [name, setName] = useState(employee.name);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSave(name);
+      }}
+    >
+      <label htmlFor="name">Name</label>
+      <input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+      <button type="submit">Save</button>
+    </form>
+  );
+}

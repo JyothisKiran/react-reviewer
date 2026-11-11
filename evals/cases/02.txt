@@ -1,0 +1,14 @@
+import { useEffect, useState } from "react";
+import type { Employee } from "../types";
+
+export function useEmployeeSearch(query: string) {
+  const [results, setResults] = useState<Employee[]>([]);
+
+  useEffect(() => {
+    fetch(`/api/employees?q=${query}`)
+      .then((res) => res.json())
+      .then((data: Employee[]) => setResults(data));
+  }, [query]);
+
+  return results;
+}
