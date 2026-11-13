@@ -1,20 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import Markdown from "react-markdown";
+import type { SourceFile } from "@/lib/files";
+import type { ReviewResult } from "@/lib/review";
+import { reviewToMarkdown } from "@/lib/review/format";
+import { ReviewResults } from "./ReviewResults";
 
 export type ReviewStatus = "idle" | "reviewing" | "done" | "error";
 
-type Props = { review: string; status: ReviewStatus; error: string; fileCount: number };
+type Props = {
+  status: ReviewStatus;
+  error: string;
+  result: ReviewResult | null;
+  /** The files being reviewed, or that were reviewed. */
+  files: SourceFile[];
+  /** Changes on every new review, so filters reset. */
+  runId: number;
+};
 
-export function ReviewOutput({ review, status, error, fileCount }: Props) {
-  const [copied, setCopied] = useState(false);
+const COPY_LABEL = { idle: "Copy as markdown", copied: "Copied", failed: "Couldn't copy" } as const;
 
-  async function copyReview() {
-    await navigator.clipboard.writeText(review);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+export function ReviewOutput({ status, error, result, files, runId }: Props) {
+  const [copy, setCopy] = useState<keyof typeof COPY_LABEL>("idle");
+
+  async function copyMarkdown() {
+    if (!result) return;
+    try {
+      await navigator.clipboard.writeText(reviewToMarkdown(result.review));
+      setCopy("copied");
+    } catch {
+      setCopy("failed");
+    }
+    setTimeout(() => setCopy("idle"), 2000);
   }
+
+  const findings = result?.review.findings.length ?? 0;
+  const announcement =
+    status === "reviewing"
+      ? `Reviewing ${files.length} ${files.length === 1 ? "file" : "files"}`
+      : status === "done"
+        ? findings
+          ? `Review finished with ${findings} ${findings === 1 ? "finding" : "findings"}`
+          : "Review finished. No issues found."
+        : "";
 
   return (
     <section
@@ -23,18 +51,19 @@ export function ReviewOutput({ review, status, error, fileCount }: Props) {
     >
       <div className="flex items-center justify-between border-b border-rule px-6 py-4">
         <h2 id="review-heading" className="text-lg font-bold">Review</h2>
-        {status === "done" && (
-          <button type="button" onClick={copyReview}
-            className="rounded-md border border-rule px-3 py-1.5 text-sm font-bold hover:border-pencil focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pencil">
-            {copied ? "Copied" : "Copy review"}
+        {status === "done" && result && (
+          <button
+            type="button"
+            onClick={copyMarkdown}
+            className="rounded-md border border-rule px-3 py-1.5 text-sm font-bold hover:border-pencil focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pencil"
+          >
+            {COPY_LABEL[copy]}
           </button>
         )}
       </div>
 
       <div className="flex-1 px-6 py-5">
-        <p className="sr-only" aria-live="polite">
-          {status === "reviewing" ? "Review started" : status === "done" ? "Review finished" : ""}
-        </p>
+        <p className="sr-only" aria-live="polite">{announcement}</p>
 
         {status === "idle" && (
           <p className="max-w-prose text-ink/70">
@@ -42,17 +71,23 @@ export function ReviewOutput({ review, status, error, fileCount }: Props) {
             hooks and tests gets the most useful feedback.
           </p>
         )}
-        {status === "reviewing" && !review && (
-          <p className="text-ink/70 motion-safe:animate-pulse">
-            Reading {fileCount} {fileCount === 1 ? "file" : "files"}…
-          </p>
-        )}
-        {status === "error" && <p role="alert" className="text-red-700">{error}</p>}
-        {review && (
-          <div className="prose prose-slate max-w-prose">
-            <Markdown>{review}</Markdown>
+        {status === "reviewing" && (
+          <div className="text-ink/70">
+            <p className="motion-safe:animate-pulse">
+              Reviewing {files.length} {files.length === 1 ? "file" : "files"}. This can take up to a minute.
+            </p>
+            <ul className="mt-2 max-h-48 overflow-y-auto font-mono text-sm">
+              {files.map((f) => <li key={f.path} className="truncate" title={f.path}>{f.path}</li>)}
+            </ul>
           </div>
         )}
+        {status === "error" && (
+          <div role="alert" className="max-w-prose">
+            <p className="font-bold text-red-700">The review didn&apos;t finish.</p>
+            <p className="mt-1">{error}</p>
+          </div>
+        )}
+        {status === "done" && result && <ReviewResults key={runId} result={result} files={files} />}
       </div>
     </section>
   );

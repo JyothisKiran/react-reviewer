@@ -1,6 +1,11 @@
 description: React reviewer evals (30 cases)
 prompts: ["unused"]                  # the provider builds the real prompt
 providers: [file://evals/provider.ts]
+evaluateOptions:
+  maxConcurrency: 1   # one review at a time, for free-tier rate limits
+  delay: 2000         # ms between cases
+  timeoutMs: 130000   # per case; above the pipeline's own 100 s budget (lib/review/config.ts)
+  cache: false        # always call Gemini; never reuse an earlier response
 defaultTest:
   vars: { linter: [] }
   assert:

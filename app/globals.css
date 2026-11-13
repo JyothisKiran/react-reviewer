@@ -8,6 +8,12 @@
   --color-rule: #d6dde8;
   --color-pencil: #2b50aa;
   --color-highlight: #fff4b8;
+  /* Severity colours: always paired with a text label. Each is at least 5.3:1 with white text. */
+  --color-sev-critical: #a4161a;
+  --color-sev-high: #b93815;
+  --color-sev-medium: #8a5a00;
+  --color-sev-low: #2b50aa;
+  --color-sev-suggestion: #4b5563;
   --font-sans: var(--font-atkinson), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }

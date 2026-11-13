@@ -1,9 +1,9 @@
-import { GoogleGenAI } from "@google/genai";
-import { GEM_INSTRUCTIONS } from "@/prompts/gem";
-import { MAX_FILES, MAX_TOTAL_CHARS, totalChars, type SourceFile } from "@/lib/files";
+import { MAX_CHANGE_CHARS, MAX_FILES, MAX_TOTAL_CHARS, totalChars, type SourceFile } from "@/lib/files";
+import { ReviewError, reviewFiles, type ReviewErrorCode } from "@/lib/review";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const MODEL = "gemini-3.5-flash"; // keep whichever model worked for you in v0
+// Must stay above REVIEW_TIMEOUT_MS in lib/review/config.ts, which bounds every Gemini
+// call, retry and wait. route.test.ts checks this.
+export const maxDuration = 120;
 
 function checkFiles(files: unknown): string | null {
   if (!Array.isArray(files) || files.length === 0) return "Add at least one file to review.";
@@ -16,55 +16,69 @@ function checkFiles(files: unknown): string | null {
   return null;
 }
 
-function buildPrompt(files: SourceFile[]) {
-  const intro =
-    files.length === 1
-      ? "Review this file."
-      : `Review these ${files.length} files together. Look at how they work with each other, not only at each file on its own.`;
-  const blocks = files.map((f) => `<file path="${f.path}">\n${f.content}\n</file>`).join("\n\n");
-  return `${intro}\n\n${blocks}`;
+function checkChange(change: unknown): string | null {
+  if (change === undefined || change === null) return null;
+  if (typeof change !== "string") return "The change description couldn't be read. Clear it and try again.";
+  if (change.length > MAX_CHANGE_CHARS) {
+    return `Shorten the change description to ${MAX_CHANGE_CHARS.toLocaleString("en")} characters or fewer.`;
+  }
+  return null;
 }
 
-function toTextStream(chunks: AsyncIterable<{ text?: string }>) {
-  const encoder = new TextEncoder();
-  return new ReadableStream<Uint8Array>({
-    async start(controller) {
-      try {
-        for await (const chunk of chunks) {
-          if (chunk.text) controller.enqueue(encoder.encode(chunk.text));
-        }
-      } catch (error) {
-        console.error(error);
-        controller.enqueue(
-          encoder.encode("\n\n---\n\n**The review stopped partway through. Run it again to get the full review.**")
-        );
-      } finally {
-        controller.close();
-      }
-    },
-  });
-}
+const FAILURES: Record<ReviewErrorCode, { status: number; message: (e: ReviewError) => string }> = {
+  "missing-api-key": {
+    status: 500,
+    message: () => "The server has no Gemini API key. Add GEMINI_API_KEY to .env.local, restart the server, then try again.",
+  },
+  "quota-exhausted": {
+    status: 429,
+    message: () => "This Gemini API key has used up its quota for now. Try again after the quota resets, or use a key with a higher limit.",
+  },
+  "rate-limited": {
+    status: 429,
+    message: (e) =>
+      `Gemini is limiting requests right now. Wait ${e.retryAfterSeconds ? `about ${e.retryAfterSeconds} seconds` : "a minute"}, then try again.`,
+  },
+  unavailable: { status: 503, message: () => "Gemini isn't responding right now. Try again in a minute." },
+  rejected: {
+    status: 502,
+    message: (e) =>
+      e.status === 401 || e.status === 403
+        ? "Gemini rejected the API key. Check GEMINI_API_KEY in .env.local, restart the server, then try again."
+        : "Gemini rejected the request. Check the server terminal for details.",
+  },
+  "invalid-output": {
+    status: 502,
+    message: () => "Gemini sent back a review that couldn't be read, even after a retry. Try again, or review fewer files at once.",
+  },
+  timeout: { status: 504, message: () => "The review took too long. Try again, or review fewer files at once." },
+};
 
 export async function POST(request: Request) {
-  const { files } = await request.json().catch(() => ({ files: null }));
+  const body = await request.json().catch(() => null);
+  const files: unknown = body?.files;
+  const change: unknown = body?.change;
 
-  const problem = checkFiles(files);
+  const problem = checkFiles(files) ?? checkChange(change);
   if (problem) return Response.json({ error: problem }, { status: 400 });
 
+  const sources = (files as SourceFile[]).map(({ path, content }) => ({ path, content }));
   try {
-    const stream = await ai.models.generateContentStream({
-      model: MODEL,
-      contents: buildPrompt(files),
-      config: { systemInstruction: GEM_INSTRUCTIONS },
-    });
-    return new Response(toTextStream(stream), {
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
-    });
-  } catch (error) {
-    console.error(error);
-    return Response.json(
-      { error: "Couldn't reach Gemini. Check the terminal for details, then try again." },
-      { status: 502 }
+    const result = await reviewFiles(sources, { change: change as string | undefined });
+    const { meta, dropped } = result;
+    console.info(
+      `[review] ${sources.length} file(s), ${result.review.findings.length} finding(s) kept, ${dropped.length} dropped ` +
+        `(${dropped.map((d) => d.reason).join(", ") || "none"}), ${meta.calls} call(s), ${meta.latencyMs} ms, ${meta.modelVersion ?? meta.model}`,
     );
+    return Response.json(result);
+  } catch (error) {
+    if (error instanceof ReviewError) {
+      // The message holds Gemini's error text, never the request or the key.
+      console.error(`[review] ${error.code}: ${error.message}`);
+      const failure = FAILURES[error.code];
+      return Response.json({ error: failure.message(error) }, { status: failure.status });
+    }
+    console.error("[review] unexpected error:", error instanceof Error ? (error.stack ?? error.message) : error);
+    return Response.json({ error: "Something went wrong on the server. Check the server terminal, then try again." }, { status: 500 });
   }
 }

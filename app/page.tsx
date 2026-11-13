@@ -3,43 +3,52 @@
 import { useState } from "react";
 import { FilePicker } from "@/components/FilePicker";
 import { ReviewOutput, type ReviewStatus } from "@/components/ReviewOutput";
-import { MAX_FILES, MAX_TOTAL_CHARS, mergeFiles, totalChars, type SourceFile } from "@/lib/files";
+import { MAX_CHANGE_CHARS, MAX_FILES, MAX_TOTAL_CHARS, mergeFiles, totalChars, type SourceFile } from "@/lib/files";
+import type { ReviewResult } from "@/lib/review";
+
+const field =
+  "w-full rounded-md border border-rule bg-sheet px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-pencil";
 
 export default function Home() {
   const [files, setFiles] = useState<SourceFile[]>([]);
-  const [review, setReview] = useState("");
+  const [change, setChange] = useState("");
   const [status, setStatus] = useState<ReviewStatus>("idle");
+  const [result, setResult] = useState<ReviewResult | null>(null);
+  const [reviewed, setReviewed] = useState<SourceFile[]>([]);
   const [error, setError] = useState("");
+  const [runId, setRunId] = useState(0);
 
   const reviewing = status === "reviewing";
   const withinLimits = files.length <= MAX_FILES && totalChars(files) <= MAX_TOTAL_CHARS;
   const canReview = files.length > 0 && withinLimits && !reviewing;
 
   async function handleReview() {
+    // Keep the files as sent, so "Show code" matches what was reviewed even if the list changes.
+    const snapshot = files;
+    setReviewed(snapshot);
     setStatus("reviewing");
-    setReview("");
+    setResult(null);
     setError("");
     try {
       const res = await fetch("/api/review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ files }),
+        body: JSON.stringify({ files: snapshot, change }),
       });
-      if (!res.ok || !res.body) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "The review couldn't start. Try again in a moment.");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.review) {
+        throw new Error(data?.error ?? "The server sent back something unexpected. Try again in a moment.");
       }
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const text = decoder.decode(value, { stream: true });
-        setReview((prev) => prev + text);
-      }
+      setResult(data as ReviewResult);
+      setRunId((id) => id + 1);
       setStatus("done");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "The review couldn't start. Try again in a moment.");
+      const offline = e instanceof TypeError;
+      setError(
+        offline
+          ? "Couldn't reach the server. Check that it's running and you're online, then try again."
+          : e instanceof Error ? e.message : "The review couldn't finish. Try again in a moment.",
+      );
       setStatus("error");
     }
   }
@@ -68,6 +77,26 @@ export default function Home() {
             onClear={() => setFiles([])}
             disabled={reviewing}
           />
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="change" className="font-bold">
+              Describe the change <span className="font-normal text-ink/70">(optional)</span>
+            </label>
+            <p id="change-hint" className="text-sm text-ink/70">
+              What the code is for or what changed. The first line is used as the title.
+            </p>
+            <textarea
+              id="change"
+              aria-describedby="change-hint"
+              value={change}
+              onChange={(e) => setChange(e.target.value)}
+              maxLength={MAX_CHANGE_CHARS}
+              rows={3}
+              disabled={reviewing}
+              className={field}
+            />
+          </div>
+
           <button
             type="button"
             onClick={handleReview}
@@ -78,7 +107,7 @@ export default function Home() {
           </button>
         </div>
 
-        <ReviewOutput review={review} status={status} error={error} fileCount={files.length} />
+        <ReviewOutput status={status} error={error} result={result} files={reviewed} runId={runId} />
       </main>
     </div>
   );

@@ -9,9 +9,10 @@ Next.js App Router, TypeScript (strict), Tailwind v4 with design tokens in app/g
 - app/api/review/route.ts: review endpoint
 - app/page.tsx, components/: UI
 - lib/files.ts: file reading and limits (30 files, 200,000 characters)
-- lib/review/: review pipeline (schema.ts, postprocess.ts, and more from v2)
+- lib/review/: review pipeline. index.ts exports reviewFiles. annotate.ts, prompt.ts, gemini.ts (structured output, retries, time budget), postprocess.ts, schema.ts. config.ts holds the model, prompt version, time budget and default project context. constants.ts and format.ts are client-safe (no Zod, no fs).
 - prompts/: gem.ts (original Gem, the baseline), review.v1.md and review.user.v1.md (structured prompt)
-- evals/: 30 cases as .txt, assert.js, provider.ts, results; promptfooconfig.yaml at the root. evals/ is excluded from the Next.js build.
+- evals/: 30 cases as .txt, assert.js, provider.ts, summarize.js, results/; promptfooconfig.yaml at the root. evals/ is excluded from the Next.js build, lint and Vitest.
+- Tests: Vitest, next to the code (*.test.ts, *.test.tsx). Component tests start with `// @vitest-environment jsdom`. Gemini is always faked.
 - docs/ROADMAP.md: versions, their specs and "done when" checks
 
 ## Rules
@@ -26,4 +27,4 @@ Next.js App Router, TypeScript (strict), Tailwind v4 with design tokens in app/g
 - Never commit or push. When a change is done (and at the end of each version), give me a commit message and I'll commit it myself.
 
 ## Commands
-npm run dev · npm run build · npm run lint · npm test (from v2) · npx promptfoo@latest eval
+npm run dev · npm run build · npm run lint · npm test · npx promptfoo@latest eval (see evals/README.md)

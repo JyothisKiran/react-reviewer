@@ -2,6 +2,7 @@ export type SourceFile = { path: string; content: string };
 
 export const MAX_FILES = 30;
 export const MAX_TOTAL_CHARS = 200_000;
+export const MAX_CHANGE_CHARS = 2_000;
 
 const CODE_FILE = /\.(tsx?|jsx?|mjs|cjs|css|scss|json|md)$/i;
 const SKIPPED_PATH = /(^|\/)(node_modules|\.next|dist|build|coverage|\.git)\//;
