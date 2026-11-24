@@ -1,13 +1,14 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { buildPrompt, fillTemplate, NONE, NOT_PROVIDED, splitChange } from "./prompt";
+import { PROMPT_FILES } from "./config";
 
 const diff = "### src/a.ts\n+ 1 | const a = 1;";
 
 describe("buildPrompt", () => {
-  it("uses review.v1.md as the system instruction", () => {
+  it("uses the configured system prompt", () => {
     const { system } = buildPrompt({ annotatedDiff: diff });
-    expect(system).toBe(readFileSync("prompts/review.v1.md", "utf8").trim());
+    expect(system).toBe(readFileSync(`prompts/${PROMPT_FILES.system}`, "utf8").trim());
   });
 
   it("fills every placeholder in the user template", () => {

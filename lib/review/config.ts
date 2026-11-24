@@ -1,8 +1,8 @@
 export const MODEL = "gemini-3.5-flash-lite";
 
 // Never overwrite a prompt version that has eval results: add review.v2.md etc. and point here.
-export const PROMPT_VERSION = "review.v1";
-export const PROMPT_FILES = { system: "review.v1.md", user: "review.user.v1.md" } as const;
+export const PROMPT_VERSION = "review.v2";
+export const PROMPT_FILES = { system: "review.v2.md", user: "review.user.v1.md" } as const;
 
 /**
  * Time budget for one review, covering every Gemini call, retry and wait.

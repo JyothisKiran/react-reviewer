@@ -36,7 +36,7 @@ describe("reviewFiles", () => {
     expect(prompts[0]).toContain("<title>Add totals</title>");
     expect(result.review.findings.map((f) => f.title)).toEqual(["Float sum"]);
     expect(result.dropped).toEqual([{ reason: "ungrounded", detail: expect.any(String), finding: madeUp }]);
-    expect(result.meta).toMatchObject({ model: "gemini-3.5-flash-lite", promptVersion: "review.v1", calls: 1, validationRetries: 0 });
+    expect(result.meta).toMatchObject({ model: "gemini-3.5-flash-lite", promptVersion: "review.v2", calls: 1, validationRetries: 0 });
     expect(result.meta.latencyMs).toBeGreaterThanOrEqual(0);
   });
 

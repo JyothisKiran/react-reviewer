@@ -5,6 +5,8 @@ Scoring rules are in [README.md](README.md). Recall counts the 20 cases with a p
 | version | date | recall (Caught/20) | partial count | false-positive rate (Noisy/9) | dropped (low confidence / ungrounded / over cap) | notes |
 |---|---|---|---|---|---|---|
 | gem-original | 2026-11-11 | 20/20 (100%) | 0 | 5/9 (56%) | n/a (no postprocessing) | Manual run in the app, one case at a time. Noisy: 10, 11, 26, 27, 30. Case 09 skipped. Sheet: [scoring-sheet-gem-original-2026-11-11.csv](scoring-sheet-gem-original-2026-11-11.csv) |
+| v1-prompt | 2026-11-24 | 16/20 (80%) | 0 | 0/9 (0%) | 0 / 3 / 0 (of 27 raw findings) | Automated run. Missed: 06, 07, 08, 19. No partial findings. Case 09 repeated the linter finding as Low, so it failed its linter-dedupe check but remains excluded from the false-positive rate. Raw: [v1-prompt-2026-11-24.json](results/v1-prompt-2026-11-24.json) |
+| v2-prompt | 2026-11-24 | 18/20 (90%) | 0 | 1/9 (11%) | 0 / 0 / 0 (of 22 raw findings) | Automated run. Missed: 08, 19. Fixed: 06, 07, and 09. Regressed: 27 became noisy at Medium. Raw: [v2-prompt-2026-11-24.json](results/v2-prompt-2026-11-24.json) |
 
 ## Definitions for automated runs
 

@@ -1,0 +1,4816 @@
+{
+  "evalId": "eval-dcd-2026-11-24T06:01:34",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-11-24T06:01:34.776Z",
+    "prompts": [
+      {
+        "id": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "raw": "unused",
+        "label": "unused",
+        "provider": "react-reviewer",
+        "metrics": {
+          "score": 27,
+          "testPassCount": 27,
+          "testFailCount": 3,
+          "testErrorCount": 0,
+          "testCacheHitCount": 0,
+          "assertPassCount": 27,
+          "assertFailCount": 3,
+          "totalLatencyMs": 114047,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 30,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Storing derived data in state",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "dfd58418-5f8d-4e3d-9d55-da27b3521b84",
+        "latencyMs": 1988,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a ProfileHeader component that synchronizes props into state via an effect. This causes redundant renders and unnecessary state synchronization.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[],\"assumptions\":[\"No PR description was provided, so intent was inferred solely from code.\"],\"findings\":[{\"file\":\"src/features/profile/ProfileHeader.tsx\",\"line\":6,\"endLine\":10,\"evidence\":\"  const [fullName, setFullName] = useState(\\\"\\\");\",\"title\":\"Storing derived data in state\",\"why\":\"Storing values derived directly from props into state requires an effect to synchronize them, leading to an extra render pass on every prop change.\",\"fix\":\"Remove the useState and useEffect hooks, and compute fullName directly during render.\",\"suggestedCode\":\"export function ProfileHeader({ firstName, lastName }: Props) {\\n  const fullName = `${firstName} ${lastName}`;\\n  return <h1>{fullName}</h1>;\\n}\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.99}]}",
+          "latencyMs": 1988,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1988,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "01 derived state in effect",
+          "vars": {
+            "linter": [],
+            "path": "src/features/profile/ProfileHeader.tsx",
+            "casefile": "evals/cases/01.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "react"
+              ],
+              "lines": [
+                6,
+                10
+              ],
+              "minSeverity": "low"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/profile/ProfileHeader.tsx",
+          "casefile": "evals/cases/01.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react"
+            ],
+            "lines": [
+              6,
+              10
+            ],
+            "minSeverity": "low"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1988,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing race condition handling and loading states in search hook",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "be65f20b-b638-4407-a9d3-bc6e99f477f9",
+        "latencyMs": 2216,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a custom hook for searching employees using a direct fetch call inside an effect. It lacks loading/error states, cancellation for race conditions, and integration with the project's existing RTK Query setup.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and straightforward custom hook structure.\"],\"assumptions\":[\"The project already utilizes RTK Query for data fetching elsewhere as specified in project context.\"],\"findings\":[{\"file\":\"src/features/search/useEmployeeSearch.ts\",\"line\":8,\"endLine\":11,\"evidence\":\"    fetch(`/api/employees?q=${query}`)\",\"title\":\"Missing race condition handling and loading states in search hook\",\"why\":\"Rapid typing will cause multiple fetch requests to resolve out of order, leading to race conditions where stale search results overwrite newer ones. Additionally, there is no error handling or loading state for consumers of the hook.\",\"fix\":\"Replace the manual fetch with RTK Query or use an AbortController in the useEffect to cancel pending requests when the query changes.\",\"category\":\"api\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 2216,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2216,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "02 search request race",
+          "vars": {
+            "linter": [],
+            "path": "src/features/search/useEmployeeSearch.ts",
+            "casefile": "evals/cases/02.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "correctness",
+                "api"
+              ],
+              "lines": [
+                7,
+                11
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/search/useEmployeeSearch.ts",
+          "casefile": "evals/cases/02.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              7,
+              11
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2216,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Unsanitized dangerouslySetInnerHTML introduces XSS risk",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "c93af465-0077-477c-b4bb-979520b62bd4",
+        "latencyMs": 1743,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a new AnnouncementCard component that renders raw HTML strings provided via props using dangerouslySetInnerHTML, without any sanitization.\",\"rating\":\"major-issues\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean component structure utilizing semantic HTML elements like article.\"],\"assumptions\":[\"The bodyHtml string comes from an API and could theoretically contain malicious payloads if any employee account is compromised or if inputs are not sanitized server-side.\"],\"findings\":[{\"file\":\"src/features/announcements/AnnouncementCard.tsx\",\"line\":8,\"endLine\":8,\"evidence\":\"      <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />\",\"title\":\"Unsanitized dangerouslySetInnerHTML introduces XSS risk\",\"why\":\"Rendering raw HTML strings via dangerouslySetInnerHTML without prior sanitization exposes the application to Cross-Site Scripting (XSS) attacks if the input string contains malicious scripts.\",\"fix\":\"Sanitize the HTML string using a trusted library like DOMPurify before passing it to dangerouslySetInnerHTML.\",\"suggestedCode\":\"import DOMPurify from 'dompurify';\\n\\nexport function AnnouncementCard({ title, bodyHtml }: Props) {\\n  const sanitizedHtml = DOMPurify.sanitize(bodyHtml);\\n  return (\\n    <article>\\n      <h2>{title}</h2>\\n      <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />\\n    </article>\\n  );\\n}\",\"category\":\"security\",\"kind\":\"bug\",\"severity\":\"critical\",\"confidence\":0.95}]}",
+          "latencyMs": 1743,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1743,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "03 XSS",
+          "vars": {
+            "linter": [],
+            "path": "src/features/announcements/AnnouncementCard.tsx",
+            "casefile": "evals/cases/03.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "security"
+              ],
+              "lines": [
+                8,
+                8
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/announcements/AnnouncementCard.tsx",
+          "casefile": "evals/cases/03.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              8,
+              8
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1743,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Unsafe non-null assertion on array find result",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "383d95d7-d3ea-4127-baac-73c03c126691",
+        "latencyMs": 23295,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This PR adds a SelectedEmployee component that looks up an employee by ID using a non-null assertion. The main risk is a runtime crash if the selected ID does not match any employee in the array.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and concise functional component structure.\",\"Appropriate use of TypeScript type definitions for props.\"],\"assumptions\":[\"SelectedId might sometimes fail to find a matching employee due to asynchronous loading or out-of-sync state.\"],\"findings\":[{\"file\":\"src/features/timesheet/SelectedEmployee.tsx\",\"line\":6,\"endLine\":6,\"evidence\":\"  const employee = employees.find((e) => e.id === selectedId)!;\",\"title\":\"Unsafe non-null assertion on array find result\",\"why\":\"Using the non-null assertion operator (!) when finding an item in an array will cause a runtime crash if no employee matches the selectedId.\",\"fix\":\"Handle the case where the employee is not found gracefully, such as returning null or a fallback message.\",\"suggestedCode\":\"  const employee = employees.find((e) => e.id === selectedId);\\n  if (!employee) return null;\",\"category\":\"typescript\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 23295,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 23295,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "04 non-null assertion",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/SelectedEmployee.tsx",
+            "casefile": "evals/cases/04.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "typescript",
+                "correctness"
+              ],
+              "lines": [
+                6,
+                7
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/SelectedEmployee.tsx",
+          "casefile": "evals/cases/04.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              6,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 23295,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Avoid using array index as React key",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "190db820-f814-4ed3-a76c-4d1eaf13c5e7",
+        "latencyMs": 2739,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a LineItems component that manages a local list of items with removal functionality and unmanaged inputs using array index keys.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and concise functional component structure.\",\"Uses state updater callback correctly when filtering items.\"],\"assumptions\":[\"The component is expected to handle item reordering or deletion without losing internal input states unexpectedly, or items have stable unique identifiers.\"],\"findings\":[{\"file\":\"src/features/budget/LineItems.tsx\",\"line\":12,\"endLine\":12,\"evidence\":\"        <li key={index}>\",\"title\":\"Avoid using array index as React key\",\"why\":\"Using the array index as a key for items that can be removed causes React to reuse DOM nodes incorrectly, leading to state corruption in uncontrolled inputs when items are deleted.\",\"fix\":\"Use the unique item id as the React key instead of the index.\",\"suggestedCode\":\"        <li key={item.id}>\",\"category\":\"react\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.95},{\"file\":\"src/features/budget/LineItems.tsx\",\"line\":6,\"endLine\":6,\"evidence\":\"  const [items, setItems] = useState(initial);\",\"title\":\"Synchronize initial prop to local state\",\"why\":\"Initializing local state directly from props without a synchronization mechanism or key reset means subsequent changes to the initial prop will not be reflected in the component state.\",\"fix\":\"If the component needs to track updates to initial props, derive the state or use a key on the component instance to reset it.\",\"category\":\"state-management\",\"kind\":\"risk\",\"severity\":\"low\",\"confidence\":0.7}]}",
+          "latencyMs": 2739,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2739,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "05 index keys",
+          "vars": {
+            "linter": [],
+            "path": "src/features/budget/LineItems.tsx",
+            "casefile": "evals/cases/05.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "react",
+                "correctness"
+              ],
+              "lines": [
+                11,
+                13
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/budget/LineItems.tsx",
+          "casefile": "evals/cases/05.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              11,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2739,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing dialog semantics and accessibility roles",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "a3a38b71-ad44-433e-b819-e1035b87c8dc",
+        "latencyMs": 2419,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a basic ConfirmDialog component. However, it lacks accessibility attributes, proper semantic structure, and keyboard/focus management.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and straightforward component structure.\"],\"assumptions\":[\"No PR description was provided, so component requirements are inferred from standard modal/dialog design practices.\"],\"findings\":[{\"file\":\"src/components/ConfirmDialog.tsx\",\"line\":7,\"endLine\":7,\"evidence\":\"    <div className=\\\"fixed inset-0 bg-black/50\\\">\",\"title\":\"Missing dialog semantics and accessibility roles\",\"why\":\"Screen readers will not recognize this container as a modal dialog because it lacks ARIA attributes like role=\\\"dialog\\\", aria-modal=\\\"true\\\", and an accessible name.\",\"fix\":\"Add appropriate ARIA roles, aria-modal, and aria-labelledby attributes to make the dialog accessible.\",\"suggestedCode\":\"    <div role=\\\"dialog\\\" aria-modal=\\\"true\\\" aria-labelledby=\\\"dialog-message\\\" className=\\\"fixed inset-0 bg-black/50\\\">\",\"category\":\"accessibility\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.95},{\"file\":\"src/components/ConfirmDialog.tsx\",\"line\":11,\"endLine\":11,\"evidence\":\"        <button onClick={onConfirm}>Delete</button>\",\"title\":\"Hardcoded action label in generic component\",\"why\":\"The component is named ConfirmDialog and accepts a generic message, but the confirm button text is hardcoded as 'Delete', limiting its reuse for other confirmation actions (e.g., 'Save', 'Leave').\",\"fix\":\"Accept an optional or required confirmText prop with a sensible default.\",\"suggestedCode\":\"type Props = { open: boolean; message: string; confirmText?: string; onConfirm: () => void; onCancel: () => void };\",\"category\":\"maintainability\",\"kind\":\"improvement\",\"severity\":\"low\",\"confidence\":0.9}]}",
+          "latencyMs": 2419,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2419,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "06 inaccessible dialog",
+          "vars": {
+            "linter": [],
+            "path": "src/components/ConfirmDialog.tsx",
+            "casefile": "evals/cases/06.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/components/ConfirmDialog.tsx",
+          "casefile": "evals/cases/06.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2419,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Redundant server state copying into Redux",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "93e50da0-1f3e-4755-8b19-8545e52ae156",
+        "latencyMs": 1598,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an AchievementsPage component that fetches data via RTK Query and synchronizes it into a Redux slice using an effect, passing the state down to a list component.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Leverages RTK Query for data fetching.\"],\"assumptions\":[\"The achievementsApi and achievementsSlice are correctly implemented elsewhere.\",\"selectAchievements pulls from the slice populated by setAchievements.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":13,\"endLine\":13,\"evidence\":\"if (data) dispatch(setAchievements(data));\",\"title\":\"Redundant server state copying into Redux\",\"why\":\"Copying RTK Query server data into a separate Redux slice duplicates state and defeats the caching, loading, and automatic refetching benefits of RTK Query.\",\"fix\":\"Remove the synchronization effect and the redundant Redux slice state. Use the data returned directly by useGetAchievementsQuery or select it from the RTK Query cache.\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1598,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1598,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1598,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "0745a034-6ecf-4eeb-8830-59474716fd2e",
+        "latencyMs": 1146,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a utility function to convert rupees to paise by multiplying by 100.\",\"rating\":\"acceptable\",\"readiness\":\"ready\",\"strengths\":[\"Clean and concise utility function.\"],\"assumptions\":[\"The input numbers are safely scaled or handle floating-point precision issues elsewhere.\"],\"findings\":[]}",
+          "latencyMs": 1146,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1146,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "08 injection + float bug",
+          "vars": {
+            "linter": [],
+            "path": "src/features/payments/toPaise.ts",
+            "casefile": "evals/cases/08.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "correctness"
+              ],
+              "lines": [
+                5,
+                5
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/payments/toPaise.ts",
+          "casefile": "evals/cases/08.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness"
+            ],
+            "lines": [
+              5,
+              5
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1146,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing event listener cleanup in useEffect",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "f1a6e07b-3a0c-4d39-aba2-20efe9a58149",
+        "latencyMs": 1905,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This PR adds a custom useWindowWidth hook to track the window width. However, it fails to clean up the resize event listener, causing a memory leak on unmount.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and concise implementation of a window dimension tracking hook.\"],\"assumptions\":[\"No PR description or title was provided, assuming standard hook utility purposes.\"],\"findings\":[{\"file\":\"src/hooks/useWindowWidth.ts\",\"line\":8,\"endLine\":8,\"evidence\":\"    window.addEventListener(\\\"resize\\\", onResize);\",\"title\":\"Missing event listener cleanup in useEffect\",\"why\":\"The resize event listener is added on mount but never removed on unmount, leading to a memory leak and potential updates on unmounted components.\",\"fix\":\"Return a cleanup function from useEffect that removes the event listener.\",\"suggestedCode\":\"    window.addEventListener(\\\"resize\\\", onResize);\\n    return () => window.removeEventListener(\\\"resize\\\", onResize);\",\"category\":\"react\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":1}]}",
+          "latencyMs": 1905,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1905,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "12 listener leak",
+          "vars": {
+            "linter": [],
+            "path": "src/hooks/useWindowWidth.ts",
+            "casefile": "evals/cases/12.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "react",
+                "correctness",
+                "performance"
+              ],
+              "lines": [
+                6,
+                9
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/hooks/useWindowWidth.ts",
+          "casefile": "evals/cases/12.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness",
+              "performance"
+            ],
+            "lines": [
+              6,
+              9
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1905,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Direct mutation of state array",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "cb86b7a2-714b-4463-8b27-6cf39c850225",
+        "latencyMs": 2157,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a component that manages a list of entries using local state initialized from props, but directly mutates the array before passing it to the setter, preventing a re-render.\",\"rating\":\"major-issues\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and readable component structure using modern React syntax.\"],\"assumptions\":[\"initialEntries prop represents initial values and subsequent updates are handled locally.\"],\"findings\":[{\"file\":\"src/features/timesheet/EntryList.tsx\",\"line\":8,\"endLine\":8,\"evidence\":\"    entries.push({ id: crypto.randomUUID(), project: \\\"\\\", hours: 0 });\",\"title\":\"Direct mutation of state array\",\"why\":\"Calling push directly mutates the existing entries array in place. When setEntries is called with the same array reference, React bails out of the re-render because the reference did not change, causing the UI to fail to update.\",\"fix\":\"Create a new array containing the existing entries plus the new entry before calling setEntries.\",\"suggestedCode\":\"    setEntries([...entries, { id: crypto.randomUUID(), project: \\\"\\\", hours: 0 }]);\",\"category\":\"state-management\",\"kind\":\"bug\",\"severity\":\"critical\",\"confidence\":1}]}",
+          "latencyMs": 2157,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2157,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "13 mutated state",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/EntryList.tsx",
+            "casefile": "evals/cases/13.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "react",
+                "correctness"
+              ],
+              "lines": [
+                8,
+                9
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/EntryList.tsx",
+          "casefile": "evals/cases/13.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              8,
+              9
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2157,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing error handling for async submission",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "e88568d9-549e-4fc4-bf91-8ae305c7e15a",
+        "latencyMs": 2234,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a leave request form component with local state and a submit handler. It lacks error handling, loading states, and state management consistency with the project context (RTK Query).\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Uses semantic form elements with associated labels.\",\"Provides a status role for the submission feedback message.\"],\"assumptions\":[\"The project uses RTK Query as stated in the project context, but this form bypasses it by calling an API function directly.\",\"submitLeaveRequest can fail or take time, requiring loading and error handling.\"],\"findings\":[{\"file\":\"src/features/leave/LeaveRequestForm.tsx\",\"line\":10,\"endLine\":10,\"evidence\":\"    await submitLeaveRequest({ reason });\",\"title\":\"Missing error handling for async submission\",\"why\":\"If submitLeaveRequest rejects due to a network error or validation failure, the promise rejection is unhandled, potentially crashing the app or leaving the user hanging without feedback.\",\"fix\":\"Wrap the submission call in a try/catch block and set an error message state to inform the user.\",\"suggestedCode\":\"try { await submitLeaveRequest({ reason }); setMessage(\\\"Leave request sent.\\\"); } catch { setMessage(\\\"Failed to send request.\\\"); }\",\"category\":\"api\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95},{\"file\":\"src/features/leave/LeaveRequestForm.tsx\",\"line\":18,\"endLine\":18,\"evidence\":\"      <button type=\\\"submit\\\">Send request</button>\",\"title\":\"Missing loading state and button disable during submission\",\"why\":\"The submit button remains enabled while the asynchronous request is pending, allowing the user to click multiple times and send duplicate leave requests.\",\"fix\":\"Introduce an isSubmitting state to disable the button and change its text while the request is in flight.\",\"suggestedCode\":\"const [isSubmitting, setIsSubmitting] = useState(false);\",\"category\":\"correctness\",\"kind\":\"risk\",\"severity\":\"medium\",\"confidence\":0.9}]}",
+          "latencyMs": 2234,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2234,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "14 double submit",
+          "vars": {
+            "linter": [],
+            "path": "src/features/leave/LeaveRequestForm.tsx",
+            "casefile": "evals/cases/14.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "correctness",
+                "api"
+              ],
+              "lines": [
+                8,
+                18
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/14.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              8,
+              18
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2234,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Razorpay secret key exposed in client-side bundle",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "9ed7198e-75f6-4046-93d8-625ee958c536",
+        "latencyMs": 1715,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a client-side payment verification function using an HMAC-SHA256 signature check. However, it exposes the Razorpay secret key in client-side environment variables, creating a critical security vulnerability.\",\"rating\":\"major-issues\",\"readiness\":\"major-refactor\",\"strengths\":[\"Clean and readable async function structure for HMAC computation.\"],\"assumptions\":[\"VITE_RAZORPAY_KEY_SECRET is bundled into the client-side JavaScript via Vite environment variables.\"],\"findings\":[{\"file\":\"src/features/payments/verifyPayment.ts\",\"line\":5,\"endLine\":5,\"evidence\":\"  const secret = import.meta.env.VITE_RAZORPAY_KEY_SECRET;\",\"title\":\"Razorpay secret key exposed in client-side bundle\",\"why\":\"Variables prefixed with VITE_ are embedded into the client-side bundle. Exposing the payment gateway secret key in the browser allows anyone to extract it and forge payment signatures, bypassing payment verification entirely.\",\"fix\":\"Remove client-side verification using the secret key. Payment signature verification must be performed on a secure backend server where the secret key is safely hidden.\",\"category\":\"security\",\"kind\":\"bug\",\"severity\":\"critical\",\"confidence\":0.99}]}",
+          "latencyMs": 1715,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1715,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "15 secret in client",
+          "vars": {
+            "linter": [],
+            "path": "src/features/payments/verifyPayment.ts",
+            "casefile": "evals/cases/15.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "security"
+              ],
+              "lines": [
+                5,
+                7
+              ],
+              "minSeverity": "high"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/payments/verifyPayment.ts",
+          "casefile": "evals/cases/15.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              5,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1715,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Unhandled mutation error in async handler",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "644ac4f8-4e56-416c-86f2-7de67c1e3b3a",
+        "latencyMs": 1687,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a new SaveEntryButton component that updates a timesheet entry using an RTK Query mutation. It lacks error handling for the async mutation and does not reset the success indicator on subsequent edits.\",\"rating\":\"acceptable\",\"readiness\":\"ready-with-minor-changes\",\"strengths\":[\"Uses RTK Query mutation state to handle loading status.\",\"Includes accessible status messaging with role=\\\"status\\\".\"],\"assumptions\":[\"The useUpdateEntryMutation hook returns a result object that can be checked for errors (e.g., unwrapping or checking .error).\",\"The entry prop can change over time if the user edits different entries.\"],\"findings\":[{\"file\":\"src/features/timesheet/SaveEntryButton.tsx\",\"line\":10,\"endLine\":10,\"evidence\":\"    await updateEntry(entry);\",\"title\":\"Unhandled mutation error in async handler\",\"why\":\"If updateEntry fails (e.g. network failure or server error), an unhandled rejection may occur and setSaved(true) will still execute falsely indicating success.\",\"fix\":\"Use .unwrap() with a try/catch block or check the return value of updateEntry to handle errors properly before setting saved to true.\",\"suggestedCode\":\"    try {\\n      await updateEntry(entry).unwrap();\\n      setSaved(true);\\n    } catch {\\n      // handle error\\n    }\",\"category\":\"api\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.9}]}",
+          "latencyMs": 1687,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1687,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "16 mutation result ignored",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/SaveEntryButton.tsx",
+            "casefile": "evals/cases/16.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "api",
+                "correctness"
+              ],
+              "lines": [
+                9,
+                11
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/SaveEntryButton.tsx",
+          "casefile": "evals/cases/16.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "correctness"
+            ],
+            "lines": [
+              9,
+              11
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1687,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing return for pending status and default case",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "227431bb-feed-4a96-a0a5-dd64cc31b092",
+        "latencyMs": 1972,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This pull request introduces a statusLabel utility function for approval statuses. However, the switch statement misses a case and a default return, leading to potential runtime errors.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clear separation of utility functions into dedicated feature files.\",\"Strong typing for the input approval status.\"],\"assumptions\":[\"No PR description was provided, but the code intent is clear.\"],\"findings\":[{\"file\":\"src/features/achievements/statusLabel.ts\",\"line\":3,\"endLine\":10,\"evidence\":\"export function statusLabel(status: ApprovalStatus) {\",\"title\":\"Missing return for pending status and default case\",\"why\":\"The switch statement handles \\\"approved\\\" and \\\"rejected\\\", but omits \\\"pending\\\" as well as a default case. If called with \\\"pending\\\" or any unexpected value, the function returns undefined implicitly, which can cause runtime issues in UI components.\",\"fix\":\"Add a case for \\\"pending\\\" and a default clause or return a fallback label.\",\"suggestedCode\":\"export function statusLabel(status: ApprovalStatus) {\\n  switch (status) {\\n    case \\\"approved\\\":\\n      return \\\"Approved\\\";\\n    case \\\"rejected\\\":\\n      return \\\"Rejected\\\";\\n    case \\\"pending\\\":\\n      return \\\"Pending\\\";\\n    default:\\n      return \\\"Unknown\\\";\\n  }\\n}\",\"category\":\"correctness\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 1972,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1972,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "17 non-exhaustive switch",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/statusLabel.ts",
+            "casefile": "evals/cases/17.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "typescript",
+                "correctness"
+              ],
+              "lines": [
+                3,
+                10
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/17.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              3,
+              10
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1972,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Heavy filtering and sorting on every keystroke for large lists",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "78972fed-677c-4727-af86-b9f7ecff89f3",
+        "latencyMs": 1825,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an EmployeeDirectory component that filters and sorts a large employee list on every keystroke, causing performance degradation.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Proper use of unique identifiers for list item keys\",\"Accessible search input with an associated label\"],\"assumptions\":[\"The employees array can contain up to 12,000 records as noted in the code comment.\"],\"findings\":[{\"file\":\"src/features/directory/EmployeeDirectory.tsx\",\"line\":9,\"endLine\":11,\"evidence\":\"  const visible = employees\",\"title\":\"Heavy filtering and sorting on every keystroke for large lists\",\"why\":\"Filtering and sorting 12,000 records synchronously on every keystroke blocks the main thread, causing noticeable UI lag and input jank.\",\"fix\":\"Memoize the filtered and sorted list using useMemo or consider virtualization/debouncing if performance remains an issue.\",\"category\":\"performance\",\"kind\":\"risk\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 1825,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1825,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "18 large list",
+          "vars": {
+            "linter": [],
+            "path": "src/features/directory/EmployeeDirectory.tsx",
+            "casefile": "evals/cases/18.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "performance"
+              ],
+              "lines": [
+                9,
+                21
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/directory/EmployeeDirectory.tsx",
+          "casefile": "evals/cases/18.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "performance"
+            ],
+            "lines": [
+              9,
+              21
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1825,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "b83481d6-73ea-4807-a664-02695b8839e1",
+        "latencyMs": 36016,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a simple DeleteEntryButton component using an icon for timesheet entries. There are no critical issues or functional problems in this small diff.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Explicitly set button type to prevent unintended form submissions.\",\"Clean and modular component design.\"],\"assumptions\":[\"The TrashIcon component handles its own accessibility or the parent provides an aria-label if necessary, though an aria-label on the button itself would be helpful.\"],\"findings\":[]}",
+          "latencyMs": 36016,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 36016,
+              "calls": 2,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 15,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 36016,
+            "calls": 2,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing await on waitFor async assertion",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "770b48b2-8ffb-4bc5-9861-e475d9d693ae",
+        "latencyMs": 1522,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR adds a test for the LeaveRequestForm component to verify successful submission flow and confirmation messaging. However, an unawaited waitFor call leaves the asynchronous assertion prone to silent test flakes.\",\"rating\":\"acceptable\",\"readiness\":\"ready-with-minor-changes\",\"strengths\":[\"Uses userEvent for realistic interaction simulation\",\"Properly mocks the API layer using Vitest utilities\"],\"assumptions\":[\"The component uses role=status for screen reader announcements of success.\"],\"findings\":[{\"file\":\"src/features/leave/LeaveRequestForm.test.tsx\",\"line\":17,\"endLine\":17,\"evidence\":\"waitFor(() => expect(screen.getByRole(\\\"status\\\")).toHaveTextContent(\\\"Leave request sent.\\\"));\",\"title\":\"Missing await on waitFor async assertion\",\"why\":\"The waitFor function returns a Promise that must be awaited. Without an await, the test may finish executing before the assertion runs, leading to false positives or flaky tests.\",\"fix\":\"Await the waitFor call to ensure the assertion properly waits for the asynchronous state update.\",\"suggestedCode\":\"await waitFor(() => expect(screen.getByRole(\\\"status\\\")).toHaveTextContent(\\\"Leave request sent.\\\"));\",\"category\":\"testing\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.99}]}",
+          "latencyMs": 1522,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1522,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "20 un-awaited waitFor",
+          "vars": {
+            "linter": [],
+            "path": "src/features/leave/LeaveRequestForm.test.tsx",
+            "casefile": "evals/cases/20.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "testing"
+              ],
+              "lines": [
+                17,
+                17
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 16,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/20.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "testing"
+            ],
+            "lines": [
+              17,
+              17
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1522,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Missing cache invalidation on addEntry mutation",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "cae868f6-e0dc-467e-84c7-226aa481136d",
+        "latencyMs": 2139,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This diff introduces a new RTK Query API slice for the timesheet feature with endpoints for fetching and adding entries. However, the mutation does not invalidate any cache tags, which will cause the UI to display stale data after adding a new entry.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean setup of RTK Query slice following standard conventions.\",\"Appropriate TypeScript types used for query and mutation arguments.\"],\"assumptions\":[\"The backend returns the newly created entry in the response body for the addEntry mutation.\"],\"findings\":[{\"file\":\"src/features/timesheet/timesheetApi.ts\",\"line\":13,\"endLine\":16,\"evidence\":\"    addEntry: build.mutation<Entry, NewEntry>({\",\"title\":\"Missing cache invalidation on addEntry mutation\",\"why\":\"When a new timesheet entry is successfully added via the mutation, the cached entries list will not be automatically invalidated or refetched. As a result, the user will not see the newly added entry in the UI until they manually refresh or trigger another action that causes a refetch.\",\"fix\":\"Add `invalidatesTags: ['Entry']` to the `addEntry` mutation definition so that successful mutations automatically invalidate the cache and trigger a re-fetch of `getEntries`.\",\"suggestedCode\":\"    addEntry: build.mutation<Entry, NewEntry>({\\n      query: (body) => ({ url: \\\"/entries\\\", method: \\\"POST\\\", body }),\\n      invalidatesTags: [\\\"Entry\\\"],\\n    }),\",\"category\":\"api\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 2139,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2139,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "21 missing invalidation",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/timesheetApi.ts",
+            "casefile": "evals/cases/21.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "api",
+                "state-management"
+              ],
+              "lines": [
+                13,
+                15
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 17,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/21.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "state-management"
+            ],
+            "lines": [
+              13,
+              15
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2139,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Stale initial state when employee prop changes",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "d8f55e8c-44dd-4acb-a660-96078db1f46d",
+        "latencyMs": 2446,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This pull request introduces the EditEmployeeForm component for updating employee names. However, it fails to synchronize internal state when the selected employee prop changes.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean component structure with explicit TypeScript props.\",\"Properly prevents default form submission.\"],\"assumptions\":[\"The component is reused or re-rendered with a different employee prop when the user selects another employee from a list.\"],\"findings\":[{\"file\":\"src/features/employees/EditEmployeeForm.tsx\",\"line\":8,\"endLine\":8,\"evidence\":\"  const [name, setName] = useState(employee.name);\",\"title\":\"Stale initial state when employee prop changes\",\"why\":\"The useState hook initializes the name state using employee.name only on the initial mount. When a different employee is selected from the parent list, the component receives a new employee prop, but the internal name state remains stuck on the previously selected employee's name.\",\"fix\":\"Sync the state using a useEffect hook when the employee prop changes, or use a key prop on the component instance in the parent to force a remount.\",\"suggestedCode\":\"  const [name, setName] = useState(employee.name);\\n  useEffect(() => {\\n    setName(employee.name);\\n  }, [employee]);\",\"category\":\"react\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 2446,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2446,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "22 stale state from props",
+          "vars": {
+            "linter": [],
+            "path": "src/features/employees/EditEmployeeForm.tsx",
+            "casefile": "evals/cases/22.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "react",
+                "state-management",
+                "correctness"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 18,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/employees/EditEmployeeForm.tsx",
+          "casefile": "evals/cases/22.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "state-management",
+              "correctness"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2446,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Open Redirect Vulnerability",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "f42ebf86-f424-4881-aa4d-744976d29251",
+        "latencyMs": 3600,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a LoginPage component handling navigation post-login with a check for external redirection via search parameters.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean and straightforward component structure.\"],\"assumptions\":[\"The next search parameter is intended for local navigation or explicit trusted domains.\"],\"findings\":[{\"file\":\"src/features/auth/LoginPage.tsx\",\"line\":10,\"endLine\":10,\"evidence\":\"    if (next.startsWith(\\\"http\\\")) {\",\"title\":\"Open Redirect Vulnerability\",\"why\":\"Using startWith('http') allows a malicious actor to supply an absolute URL like 'https://evil.com' via the next query parameter, leading to an open redirect vulnerability that can be leveraged for phishing attacks.\",\"fix\":\"Validate that the URL is relative or strictly belongs to an allowed domain whitelist before performing an external navigation via window.location.href.\",\"category\":\"security\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 3600,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 3600,
+              "calls": 2,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "23 open redirect",
+          "vars": {
+            "linter": [],
+            "path": "src/features/auth/LoginPage.tsx",
+            "casefile": "evals/cases/23.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "security"
+              ],
+              "lines": [
+                9,
+                13
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 19,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/auth/LoginPage.tsx",
+          "casefile": "evals/cases/23.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              9,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 3600,
+            "calls": 2,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "29e0d4b8-889b-4d93-b6a2-f2192263547f",
+        "latencyMs": 3333,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"Added a basic error parsing utility function to extract error messages safely.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Checks for standard Error instances before falling back to a default message.\"],\"assumptions\":[\"No PR description or team rules were provided.\"],\"findings\":[]}",
+          "latencyMs": 3333,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 3333,
+              "calls": 2,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "09 linter dedupe",
+          "vars": {
+            "linter": [
+              {
+                "file": "src/utils/parseError.ts",
+                "line": 1,
+                "rule": "@typescript-eslint/no-explicit-any",
+                "message": "Unexpected any. Specify a different type."
+              }
+            ],
+            "path": "src/utils/parseError.ts",
+            "casefile": "evals/cases/09.txt",
+            "expect": {
+              "type": "clean",
+              "linterLine": 1,
+              "linterCategory": "typescript"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 20,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [
+            {
+              "file": "src/utils/parseError.ts",
+              "line": 1,
+              "rule": "@typescript-eslint/no-explicit-any",
+              "message": "Unexpected any. Specify a different type."
+            }
+          ],
+          "path": "src/utils/parseError.ts",
+          "casefile": "evals/cases/09.txt",
+          "expect": {
+            "type": "clean",
+            "linterLine": 1,
+            "linterCategory": "typescript"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 3333,
+            "calls": 2,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "0fe0f7b1-15cc-4abe-ae4b-53800db171a6",
+        "latencyMs": 3467,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a new TimesheetWeek component that fetches and renders timesheet data based on a weekStart prop, handling loading, error, empty, and success states correctly.\",\"rating\":\"excellent\",\"readiness\":\"ready\",\"strengths\":[\"Proper accessibility attributes used for loading and error states with role status and alert.\",\"Clean usage of RTK Query hook with error retry capability via refetch.\"],\"assumptions\":[\"The TimesheetTable component correctly expects an array of entries matching the data structure.\",\"weekStart is a valid string parameter for useGetTimesheetQuery.\"],\"findings\":[]}",
+          "latencyMs": 3467,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 3467,
+              "calls": 2,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "10 clean RTK Query component",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/TimesheetWeek.tsx",
+            "casefile": "evals/cases/10.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 21,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/TimesheetWeek.tsx",
+          "casefile": "evals/cases/10.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 3467,
+            "calls": 2,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "126cd0e7-ba33-4af4-b956-1aff281f13fe",
+        "latencyMs": 1205,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a BudgetMeter component displaying a progress bar with percentage calculations and accessibility attributes.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Uses React's useId hook for generating stable unique accessibility IDs.\",\"Properly clamps the progress percentage between 0 and 100 to prevent layout distortion.\",\"Correctly wires up ARIA attributes for the progressbar role.\"],\"assumptions\":[\"No PR description or project-specific team rules were provided.\"],\"findings\":[]}",
+          "latencyMs": 1205,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1205,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "11 clean meter",
+          "vars": {
+            "linter": [],
+            "path": "src/features/budget/BudgetMeter.tsx",
+            "casefile": "evals/cases/11.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 22,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/budget/BudgetMeter.tsx",
+          "casefile": "evals/cases/11.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1205,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "f9e1af47-8ca0-4a1c-81fb-088943fa8ed7",
+        "latencyMs": 1401,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a generic useDebouncedValue hook implemented cleanly with React state and effects.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Clean and correct cleanup of the timeout in the effect return function\",\"Generic typing ensures reusability across different value types\"],\"assumptions\":[\"No specific team rules or linter findings were provided, and the implementation is straightforward.\"],\"findings\":[]}",
+          "latencyMs": 1401,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1401,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "24 clean debounce hook",
+          "vars": {
+            "linter": [],
+            "path": "src/hooks/useDebouncedValue.ts",
+            "casefile": "evals/cases/24.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 23,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/hooks/useDebouncedValue.ts",
+          "casefile": "evals/cases/24.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1401,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "f185191a-18ee-4033-a186-feb8e594111b",
+        "latencyMs": 1421,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"Added a utility function to map approval status strings to user-friendly labels with exhaustive TypeScript checking.\",\"rating\":\"excellent\",\"readiness\":\"ready\",\"strengths\":[\"Used TypeScript's never type for compile-time exhaustiveness checking in the switch statement.\"],\"assumptions\":[\"ApprovalStatus union type covers all possible application statuses.\"],\"findings\":[]}",
+          "latencyMs": 1421,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1421,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "25 clean exhaustive switch",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/statusLabel.ts",
+            "casefile": "evals/cases/25.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 24,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/25.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1421,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "10e345c3-6010-42a0-bee6-b57709b3f151",
+        "latencyMs": 1242,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This diff introduces a new RTK Query API slice for timesheet entries with endpoints for fetching and creating entries. The setup correctly uses tag invalidation for cache management.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Correctly encodes the query parameter to prevent injection or formatting issues.\",\"Properly types the query and mutation endpoints using RTK Query generics.\",\"Uses tag invalidation to ensure the entry cache stays fresh after mutations.\"],\"assumptions\":[\"The API base URL '/api' is correctly configured in the Vite proxy or environment.\",\"Types 'Entry' and 'NewEntry' are properly defined in './types'.\"],\"findings\":[]}",
+          "latencyMs": 1242,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1242,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "26 clean API slice",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/timesheetApi.ts",
+            "casefile": "evals/cases/26.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 25,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/26.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1242,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "False positives: Form state is not reset after successful submission",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "False positives: Form state is not reset after successful submission",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "False positives: Form state is not reset after successful submission",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "f30f058e-0dfd-4e84-9114-1476bd744c11",
+        "latencyMs": 2048,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This pull request adds a LeaveRequestForm component handling asynchronous submission states. The main risk is that the component does not handle resetting its state or clearing input values after a successful submission.\",\"rating\":\"good\",\"readiness\":\"ready-with-minor-changes\",\"strengths\":[\"Proper use of ARIA roles for status and error announcements\",\"Prevents duplicate submissions when status is already sending\",\"Clean and readable async handler structure\"],\"assumptions\":[\"The project uses standard browser APIs and React 19.\",\"submitLeaveRequest handles its own error response typing.\"],\"findings\":[{\"file\":\"src/features/leave/LeaveRequestForm.tsx\",\"line\":16,\"endLine\":16,\"evidence\":\"      setStatus(\\\"sent\\\");\",\"title\":\"Form state is not reset after successful submission\",\"why\":\"When a leave request succeeds, the status is set to 'sent' and the textarea retains the submitted text. If the user wants to submit another request, the form remains in the 'sent' state and does not clear the input.\",\"fix\":\"Clear the reason input and reset the status back to 'idle' after a short delay or allow a new submission flow.\",\"suggestedCode\":\"      setStatus(\\\"sent\\\");\\n      setReason(\\\"\\\");\",\"category\":\"correctness\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.85}]}",
+          "latencyMs": 2048,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2048,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "27 clean form",
+          "vars": {
+            "linter": [],
+            "path": "src/features/leave/LeaveRequestForm.tsx",
+            "casefile": "evals/cases/27.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 26,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/27.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2048,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "68061856-b79f-4c43-ae55-bbf83cb2a85d",
+        "latencyMs": 1257,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"Added tests for LeaveRequestForm covering success and error submission states.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Tests use userEvent and accessible queries like getByRole and getByLabelText\",\"Both success and error branches are covered\"],\"assumptions\":[\"The component LeaveRequestForm and module leaveApi exist and match the tested API contract.\"],\"findings\":[]}",
+          "latencyMs": 1257,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1257,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "28 clean tests",
+          "vars": {
+            "linter": [],
+            "path": "src/features/leave/LeaveRequestForm.test.tsx",
+            "casefile": "evals/cases/28.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 27,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/28.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1257,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "6de3059e-06d7-422f-a9aa-4653f8ad5e5a",
+        "latencyMs": 1096,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This pull request adds a new Redux slice for managing filter states, including department selection, archive toggle, and reset functionality.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Clean and straightforward implementation using Redux Toolkit\",\"Proper typing with TypeScript and RootState integration\"],\"assumptions\":[\"The store is configured to include this filters reducer under the filters key.\"],\"findings\":[]}",
+          "latencyMs": 1096,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1096,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "29 clean slice (Immer trap)",
+          "vars": {
+            "linter": [],
+            "path": "src/features/filters/filtersSlice.ts",
+            "casefile": "evals/cases/29.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 28,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/filters/filtersSlice.ts",
+          "casefile": "evals/cases/29.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1096,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Clean",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "af99939a-025f-4a4a-9c27-8a2b01116ee0",
+        "latencyMs": 1215,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "provider": {
+          "id": "react-reviewer",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This PR adds a clean and simple AchievementList component to display a list of achievements or an empty state message.\",\"rating\":\"excellent\",\"readiness\":\"ready\",\"strengths\":[\"Appropriate use of unique item.id as a list key\",\"Clear and concise empty state handling\"],\"assumptions\":[\"Achievement type contains an id, title, and description.\"],\"findings\":[]}",
+          "latencyMs": 1215,
+          "metadata": {
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1215,
+              "calls": 1,
+              "validationRetries": 0
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "30 clean list",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementList.tsx",
+            "casefile": "evals/cases/30.txt",
+            "expect": {
+              "type": "clean"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 29,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementList.tsx",
+          "casefile": "evals/cases/30.txt",
+          "expect": {
+            "type": "clean"
+          }
+        },
+        "metadata": {
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1215,
+            "calls": 1,
+            "validationRetries": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 27,
+      "failures": 3,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 30,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 114772,
+      "evaluationDurationMs": 114772
+    }
+  },
+  "config": {
+    "description": "React reviewer evals (30 cases)",
+    "prompts": [
+      "unused"
+    ],
+    "providers": [
+      "file://evals/provider.ts"
+    ],
+    "tests": [
+      {
+        "description": "01 derived state in effect",
+        "vars": {
+          "path": "src/features/profile/ProfileHeader.tsx",
+          "casefile": "evals/cases/01.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react"
+            ],
+            "lines": [
+              6,
+              10
+            ],
+            "minSeverity": "low"
+          }
+        }
+      },
+      {
+        "description": "02 search request race",
+        "vars": {
+          "path": "src/features/search/useEmployeeSearch.ts",
+          "casefile": "evals/cases/02.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              7,
+              11
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "03 XSS",
+        "vars": {
+          "path": "src/features/announcements/AnnouncementCard.tsx",
+          "casefile": "evals/cases/03.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              8,
+              8
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "04 non-null assertion",
+        "vars": {
+          "path": "src/features/timesheet/SelectedEmployee.tsx",
+          "casefile": "evals/cases/04.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              6,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "05 index keys",
+        "vars": {
+          "path": "src/features/budget/LineItems.tsx",
+          "casefile": "evals/cases/05.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              11,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "06 inaccessible dialog",
+        "vars": {
+          "path": "src/components/ConfirmDialog.tsx",
+          "casefile": "evals/cases/06.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "07 server state in Redux",
+        "vars": {
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "08 injection + float bug",
+        "vars": {
+          "path": "src/features/payments/toPaise.ts",
+          "casefile": "evals/cases/08.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness"
+            ],
+            "lines": [
+              5,
+              5
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "12 listener leak",
+        "vars": {
+          "path": "src/hooks/useWindowWidth.ts",
+          "casefile": "evals/cases/12.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness",
+              "performance"
+            ],
+            "lines": [
+              6,
+              9
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "13 mutated state",
+        "vars": {
+          "path": "src/features/timesheet/EntryList.tsx",
+          "casefile": "evals/cases/13.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              8,
+              9
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "14 double submit",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/14.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              8,
+              18
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "15 secret in client",
+        "vars": {
+          "path": "src/features/payments/verifyPayment.ts",
+          "casefile": "evals/cases/15.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              5,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "16 mutation result ignored",
+        "vars": {
+          "path": "src/features/timesheet/SaveEntryButton.tsx",
+          "casefile": "evals/cases/16.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "correctness"
+            ],
+            "lines": [
+              9,
+              11
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "17 non-exhaustive switch",
+        "vars": {
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/17.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              3,
+              10
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "18 large list",
+        "vars": {
+          "path": "src/features/directory/EmployeeDirectory.tsx",
+          "casefile": "evals/cases/18.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "performance"
+            ],
+            "lines": [
+              9,
+              21
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "19 icon button without name",
+        "vars": {
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "20 un-awaited waitFor",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/20.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "testing"
+            ],
+            "lines": [
+              17,
+              17
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "21 missing invalidation",
+        "vars": {
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/21.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "state-management"
+            ],
+            "lines": [
+              13,
+              15
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "22 stale state from props",
+        "vars": {
+          "path": "src/features/employees/EditEmployeeForm.tsx",
+          "casefile": "evals/cases/22.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "state-management",
+              "correctness"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "23 open redirect",
+        "vars": {
+          "path": "src/features/auth/LoginPage.tsx",
+          "casefile": "evals/cases/23.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              9,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "09 linter dedupe",
+        "vars": {
+          "path": "src/utils/parseError.ts",
+          "casefile": "evals/cases/09.txt",
+          "linter": [
+            {
+              "file": "src/utils/parseError.ts",
+              "line": 1,
+              "rule": "@typescript-eslint/no-explicit-any",
+              "message": "Unexpected any. Specify a different type."
+            }
+          ],
+          "expect": {
+            "type": "clean",
+            "linterLine": 1,
+            "linterCategory": "typescript"
+          }
+        }
+      },
+      {
+        "description": "10 clean RTK Query component",
+        "vars": {
+          "path": "src/features/timesheet/TimesheetWeek.tsx",
+          "casefile": "evals/cases/10.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "11 clean meter",
+        "vars": {
+          "path": "src/features/budget/BudgetMeter.tsx",
+          "casefile": "evals/cases/11.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "24 clean debounce hook",
+        "vars": {
+          "path": "src/hooks/useDebouncedValue.ts",
+          "casefile": "evals/cases/24.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "25 clean exhaustive switch",
+        "vars": {
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/25.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "26 clean API slice",
+        "vars": {
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/26.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "27 clean form",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/27.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "28 clean tests",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/28.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "29 clean slice (Immer trap)",
+        "vars": {
+          "path": "src/features/filters/filtersSlice.ts",
+          "casefile": "evals/cases/29.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "30 clean list",
+        "vars": {
+          "path": "src/features/achievements/AchievementList.tsx",
+          "casefile": "evals/cases/30.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      }
+    ],
+    "outputPath": [
+      "evals/results/v2-prompt-2026-11-24.json"
+    ],
+    "extensions": [],
+    "evaluateOptions": {
+      "maxConcurrency": 1,
+      "delay": 2000,
+      "timeoutMs": 130000,
+      "cache": false
+    },
+    "defaultTest": {
+      "vars": {
+        "linter": []
+      },
+      "assert": [
+        {
+          "type": "javascript",
+          "value": "file://evals/assert.js"
+        }
+      ]
+    },
+    "basePath": "C:\\Users\\CL-2407-B0X10\\Documents\\react-reviewer"
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.126.0",
+    "nodeVersion": "v22.22.2",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-11-24T06:03:30.401Z",
+    "evaluationCreatedAt": "2026-11-24T06:01:34.776Z"
+  },
+  "vars": [
+    "linter",
+    "path",
+    "casefile",
+    "expect"
+  ],
+  "runtimeOptions": {
+    "maxConcurrency": 1,
+    "showProgressBar": true,
+    "eventSource": "cli",
+    "timeoutMs": 130000,
+    "cache": false,
+    "repeat": 1
+  }
+}
