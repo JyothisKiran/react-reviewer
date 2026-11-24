@@ -1,0 +1,42 @@
+# React Reviewer
+
+AI code reviewer for React and TypeScript code. A portfolio project that started as a Gemini Gem. The full plan is in docs/ROADMAP.md.
+
+## Start here
+Before making changes, read docs/ROADMAP.md and the "Current status" section below.
+
+## Current status
+- Done: v0 and v1—the original Markdown reviewer and multi-file UI.
+- Implemented but incomplete: v2 structured review.
+  - The JSON schema, Gemini pipeline, postprocessing, cards UI, tests, eval provider, and configuration are present.
+  - Build, lint, and all 75 tests pass.
+  - The v1 structured prompt has not been evaluated and evals/RESULTS.md has no v1-prompt row or raw results.
+- Not started: v2.x through v8.
+- Next roadmap version: v2.x Prompt tuning.
+
+## Stack
+Next.js App Router, TypeScript (strict), Tailwind v4 with design tokens in app/globals.css (ink, paper, sheet, rule, pencil, highlight), fonts Atkinson Hyperlegible and JetBrains Mono, @google/genai for Gemini, Zod v4, react-markdown.
+
+## Layout
+- app/api/review/route.ts: review endpoint
+- app/page.tsx, components/: UI
+- lib/files.ts: file reading and limits (30 files, 200,000 characters)
+- lib/review/: review pipeline. index.ts exports reviewFiles. annotate.ts, prompt.ts, gemini.ts (structured output, retries, time budget), postprocess.ts, schema.ts. config.ts holds the model, prompt version, time budget and default project context. constants.ts and format.ts are client-safe (no Zod, no fs).
+- prompts/: gem.ts (original Gem, the baseline), review.v1.md and review.user.v1.md (structured prompt)
+- evals/: 30 cases as .txt, assert.js, provider.ts, summarize.js, results/; promptfooconfig.yaml at the root. evals/ is excluded from the Next.js build, lint and Vitest.
+- Tests: Vitest, next to the code (*.test.ts, *.test.tsx). Component tests start with `// @vitest-environment jsdom`. Gemini is always faked.
+- docs/ROADMAP.md: versions, their specs and "done when" checks
+
+## Rules
+- Never send real client or company code to Gemini. Test with the eval cases or my own code.
+- GEMINI_API_KEY lives only in .env.local. Never log it, commit it or send it to the browser.
+- Inside lib/review use relative imports (no "@/"), so evals can import it outside Next.js.
+- Never edit evals/cases/*.txt or eval expectations to make scores look better.
+- Never overwrite a prompt version that has eval results; create the next version file instead.
+- Accessibility: severity is never shown by colour alone, keyboard focus is always visible, every control has a label.
+- Work on one roadmap version at a time. Show a plan first and wait for my approval.
+- Before finishing: npm run build, npm run lint and npm test (once it exists) must pass.
+- Never run git commit or git push. When a change is done (and at the end of each version), give me a commit message and I'll commit it myself.
+
+## Commands
+npm run dev · npm run build · npm run lint · npm test · npx promptfoo@latest eval (see evals/README.md)
