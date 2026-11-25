@@ -6,7 +6,26 @@ Scoring rules are in [README.md](README.md). Recall counts the 20 cases with a p
 |---|---|---|---|---|---|---|
 | gem-original | 2026-11-11 | 20/20 (100%) | 0 | 5/9 (56%) | n/a (no postprocessing) | Manual run in the app, one case at a time. Noisy: 10, 11, 26, 27, 30. Case 09 skipped. Sheet: [scoring-sheet-gem-original-2026-11-11.csv](scoring-sheet-gem-original-2026-11-11.csv) |
 | v1-prompt | 2026-11-24 | 16/20 (80%) | 0 | 0/9 (0%) | 0 / 3 / 0 (of 27 raw findings) | Automated run. Missed: 06, 07, 08, 19. No partial findings. Case 09 repeated the linter finding as Low, so it failed its linter-dedupe check but remains excluded from the false-positive rate. Raw: [v1-prompt-2026-11-24.json](results/v1-prompt-2026-11-24.json) |
-| v2-prompt | 2026-11-24 | 18/20 (90%) | 0 | 1/9 (11%) | 0 / 0 / 0 (of 22 raw findings) | Automated run. Missed: 08, 19. Fixed: 06, 07, and 09. Regressed: 27 became noisy at Medium. Raw: [v2-prompt-2026-11-24.json](results/v2-prompt-2026-11-24.json) |
+| v2-prompt | 2026-11-24 | 18/20 (90%) | 0 | 1/9 (11%) | 0 / 0 / 0 (of 22 raw findings) | Automated run. Missed: 08, 19. Improved: 06, 07, and 09. Regressed: 27 became noisy at Medium. Raw: [v2-prompt-2026-11-24.json](results/v2-prompt-2026-11-24.json) |
+
+## Known limitations
+
+- **Case 08 (injection + float bug):** v2 no longer gets distracted by the injected comment, but it detects the float-money issue in only 1 of 4 runs and never rates it High. Not addressed in v2.x.
+
+## Pooled repeat results
+
+Each result combines the original full-suite run with three repeat runs: 4 samples per prompt/case. These samples are small, so individual pass counts are unstable. Case 27's v1 baseline pass was a lucky result. Case 09 is excluded from the false-positive rate; it is included here only as a linter-deduplication check.
+
+| case | v1 pass | v1 run order | v2 pass | v2 run order | pooled interpretation |
+|---|---|---|---|---|---|
+| 06 | 2/4 | Fail, Fail, Pass, Pass | 1/4 | Pass, Fail, Fail, Fail | V1 and v2 remain inconsistent at this sample size. |
+| 07 | 1/4 | Fail, Pass, Fail, Fail | 3/4 | Pass, Pass, Fail, Pass | V2 led 3/4 to 1/4, but the samples are limited. |
+| 08 | 0/4 | Fail, Fail, Fail, Fail | 0/4 | Fail, Fail, Fail, Fail | Neither prompt caught the planted issue across all four samples. |
+| 09 | 0/4 | Fail, Fail, Fail, Fail | 2/4 | Pass, Fail, Pass, Fail | V2 passed 2/4; both prompts showed variability. |
+| 19 | 2/4 | Fail, Pass, Fail, Pass | 3/4 | Fail, Pass, Pass, Pass | V2 led 3/4 to 2/4, but the sample is limited. |
+| 27 | 2/4 | Pass, Fail, Pass, Fail | 1/4 | Fail, Fail, Pass, Fail | Case 27's v1 baseline pass was not stable; v2 was noisy in one of four runs. |
+
+Raw repeat data: [repeats-2026-11-24.json](results/repeats-2026-11-24.json).
 
 ## Definitions for automated runs
 
