@@ -8,7 +8,7 @@ export const MAX_FINDINGS = 10;
 export type DropReason = "low-confidence" | "ungrounded" | "over-cap";
 export type DroppedFinding = { reason: DropReason; detail: string; finding: Finding };
 
-const norm = (s: string) => s.replace(/\s+/g, " ").trim();
+const norm = (s: string) => s.replace(/\s/g, "");
 
 // addedLines: file path -> (new-file line number -> line text), from annotate()
 export function postprocess(review: Review, addedLines: AddedLines) {

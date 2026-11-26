@@ -52,6 +52,7 @@ export default class VersionedReviewerProvider {
         output: JSON.stringify(review),
         latencyMs,
         metadata: {
+          rawReview: generated.review,
           dropped,
           promptVersion: `review.${version}`,
           systemPromptFile: `prompts/review.${version}.md`,

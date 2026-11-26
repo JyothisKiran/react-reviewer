@@ -27,51 +27,52 @@ Each result combines the original full-suite run with three repeat runs: 4 sampl
 
 Raw repeat data: [repeats-2026-11-24.json](results/repeats-2026-11-24.json).
 
-## Full repeated evals (2026-11-25)
+## Full repeated evals (2026-11-25 and 2026-11-26)
 
-Runs used Promptfoo `--repeat 3 --no-cache` with the evaluation-only adapter below; every result records its explicit prompt version. The adapter uses the app's model, time budget, project context, and review stages, varying only the system prompt. Both runs completed 90 cases with zero errors and zero cache hits. Smoke-run system prompt SHA-256: v1 `fc169f16cc168f773c944dc3a1360d49a28e61dcef154a2330a02117e4b1b844`; v2 `6947b36eaec9540227ef72a39acdc19359dd50e96189ccb1878aea25ce7453aa`.
+Runs used Promptfoo `--repeat 3 --no-cache` with the evaluation-only adapter below; every result records its explicit prompt version. The adapter uses the app's model, time budget, project context, and review stages. The 2026-11-26 run keeps `review.v2` unchanged and changes only the pipeline's whitespace-insensitive evidence comparison. All three runs completed 90 cases with zero errors and caching disabled. The new result file also preserves each pre-postprocessing `rawReview`. Smoke-run system prompt SHA-256: v1 `fc169f16cc168f773c944dc3a1360d49a28e61dcef154a2330a02117e4b1b844`; v2 `6947b36eaec9540227ef72a39acdc19359dd50e96189ccb1878aea25ce7453aa`.
 
-| prompt | recall (caught/60) | false-positive rate (noisy/27, excluding case 09) | unstable cases (passes/3) |
-|---|---:|---:|---|
-| v1 | 50/60 (83.3%) | 2/27 (7.4%) | 07 (1/3), 19 (2/3), 23 (2/3), 27 (1/3) |
-| v2 | 55/60 (91.7%) | 1/27 (3.7%) | 06 (2/3), 07 (2/3), 08 (1/3), 09 (2/3), 13 (2/3), 27 (2/3) |
+| prompt / pipeline | recall (caught/60) | false-positive rate (noisy/27, excluding case 09) | dropped (low-confidence / ungrounded / over cap, of 90) | unstable cases (passes/3) |
+|---|---:|---:|---:|---|
+| v1 | 50/60 (83.3%) | 2/27 (7.4%) | 0 / 4 / 0 | 07 (1/3), 19 (2/3), 23 (2/3), 27 (1/3) |
+| v2 | 55/60 (91.7%) | 1/27 (3.7%) | 0 / 2 / 0 | 06 (2/3), 07 (2/3), 08 (1/3), 09 (2/3), 13 (2/3), 27 (2/3) |
+| v2 + whitespace-insensitive grounding (pipeline change; `review.v2`) | 54/60 (90%) | 0/27 (0%) | 0 / 1 / 0 | 06 (2/3), 07 (2/3), 09 (2/3), 19 (2/3) |
 
 Per-case assertion passes (case 09 is shown but excluded from the false-positive denominator):
 
-| case | v1 passes/3 | v2 passes/3 |
-|---|---:|---:|
-| 01 | 3/3 | 3/3 |
-| 02 | 3/3 | 3/3 |
-| 03 | 3/3 | 3/3 |
-| 04 | 3/3 | 3/3 |
-| 05 | 3/3 | 3/3 |
-| 06 | 0/3 | 2/3 |
-| 07 | 1/3 | 2/3 |
-| 08 | 0/3 | 1/3 |
-| 09 | 0/3 | 2/3 |
-| 10 | 3/3 | 3/3 |
-| 11 | 3/3 | 3/3 |
-| 12 | 3/3 | 3/3 |
-| 13 | 3/3 | 2/3 |
-| 14 | 3/3 | 3/3 |
-| 15 | 3/3 | 3/3 |
-| 16 | 3/3 | 3/3 |
-| 17 | 3/3 | 3/3 |
-| 18 | 3/3 | 3/3 |
-| 19 | 2/3 | 3/3 |
-| 20 | 3/3 | 3/3 |
-| 21 | 3/3 | 3/3 |
-| 22 | 3/3 | 3/3 |
-| 23 | 2/3 | 3/3 |
-| 24 | 3/3 | 3/3 |
-| 25 | 3/3 | 3/3 |
-| 26 | 3/3 | 3/3 |
-| 27 | 1/3 | 2/3 |
-| 28 | 3/3 | 3/3 |
-| 29 | 3/3 | 3/3 |
-| 30 | 3/3 | 3/3 |
+| case | v1 passes/3 | v2 passes/3 | v2 + grounding passes/3 |
+|---|---:|---:|---:|
+| 01 | 3/3 | 3/3 | 3/3 |
+| 02 | 3/3 | 3/3 | 3/3 |
+| 03 | 3/3 | 3/3 | 3/3 |
+| 04 | 3/3 | 3/3 | 3/3 |
+| 05 | 3/3 | 3/3 | 3/3 |
+| 06 | 0/3 | 2/3 | 2/3 |
+| 07 | 1/3 | 2/3 | 2/3 |
+| 08 | 0/3 | 1/3 | 0/3 |
+| 09 | 0/3 | 2/3 | 2/3 |
+| 10 | 3/3 | 3/3 | 3/3 |
+| 11 | 3/3 | 3/3 | 3/3 |
+| 12 | 3/3 | 3/3 | 3/3 |
+| 13 | 3/3 | 2/3 | 3/3 |
+| 14 | 3/3 | 3/3 | 3/3 |
+| 15 | 3/3 | 3/3 | 3/3 |
+| 16 | 3/3 | 3/3 | 3/3 |
+| 17 | 3/3 | 3/3 | 3/3 |
+| 18 | 3/3 | 3/3 | 3/3 |
+| 19 | 2/3 | 3/3 | 2/3 |
+| 20 | 3/3 | 3/3 | 3/3 |
+| 21 | 3/3 | 3/3 | 3/3 |
+| 22 | 3/3 | 3/3 | 3/3 |
+| 23 | 2/3 | 3/3 | 3/3 |
+| 24 | 3/3 | 3/3 | 3/3 |
+| 25 | 3/3 | 3/3 | 3/3 |
+| 26 | 3/3 | 3/3 | 3/3 |
+| 27 | 1/3 | 2/3 | 3/3 |
+| 28 | 3/3 | 3/3 | 3/3 |
+| 29 | 3/3 | 3/3 | 3/3 |
+| 30 | 3/3 | 3/3 | 3/3 |
 
-Raw results: [full-v1-repeat3-2026-11-25.json](results/full-v1-repeat3-2026-11-25.json), [full-v2-repeat3-2026-11-25.json](results/full-v2-repeat3-2026-11-25.json). Adapter copy: [adapter-2026-11-25.ts](results/adapter-2026-11-25.ts).
+Raw results: [full-v1-repeat3-2026-11-25.json](results/full-v1-repeat3-2026-11-25.json), [full-v2-repeat3-2026-11-25.json](results/full-v2-repeat3-2026-11-25.json), [v2-whitespace-grounding-repeat3-2026-11-26.json](results/v2-whitespace-grounding-repeat3-2026-11-26.json). Adapter copy: [adapter-2026-11-25.ts](results/adapter-2026-11-25.ts).
 
 ## Definitions for automated runs
 

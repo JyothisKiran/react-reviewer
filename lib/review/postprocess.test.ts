@@ -55,15 +55,46 @@ describe("postprocess", () => {
       expect(result.review.findings).toHaveLength(1);
     });
 
+    it("matches evidence with whitespace before punctuation", () => {
+      const { addedLines: lines } = annotate([
+        { path: "src/EntryList.tsx", content: 'const entry = { project: "", };' },
+      ]);
+      const result = postprocess(
+        review([finding({ file: "src/EntryList.tsx", line: 1, evidence: 'project: "" ,' })]),
+        lines,
+      );
+      expect(result.review.findings).toHaveLength(1);
+      expect(result.dropped).toEqual([]);
+    });
+
     it("finds evidence anywhere in line..endLine", () => {
       const result = postprocess(review([finding({ line: 2, endLine: 4, evidence: "return sum" })]), addedLines);
       expect(result.review.findings).toHaveLength(1);
+    });
+
+    it("matches multi-line evidence on a later line in line..endLine", () => {
+      const result = postprocess(
+        review([finding({ line: 2, endLine: 4, evidence: "return\n sum" })]),
+        addedLines,
+      );
+      expect(result.review.findings).toHaveLength(1);
+      expect(result.dropped).toEqual([]);
+    });
+
+    it("does not match evidence assembled from multiple source lines", () => {
+      const result = postprocess(
+        review([finding({ line: 2, endLine: 3, evidence: "let sum = 0;\nfor" })]),
+        addedLines,
+      );
+      expect(result.review.findings).toEqual([]);
+      expect(result.dropped[0].reason).toBe("ungrounded");
     });
 
     it.each([
       ["a file that wasn't reviewed", { file: "src/other.ts" }, "isn't one of the reviewed files"],
       ["evidence on a different line", { line: 1 }, "isn't on line 1"],
       ["paraphrased evidence", { evidence: "adds the price" }, "isn't on line 3"],
+      ["different punctuation", { evidence: "sum += item.price," }, "isn't on line 3"],
       ["empty evidence", { evidence: "   " }, "No evidence"],
       ["a line past the end of the file", { line: 40, endLine: 1_000_000_000 }, "lines 40–1000000000"],
     ])("drops %s", (_, overrides, detail) => {
