@@ -7,12 +7,15 @@ Before making changes, read docs/ROADMAP.md and the "Current status" section bel
 
 ## Current status
 - Done: v0 and v1—the original Markdown reviewer and multi-file UI.
-- Implemented but incomplete: v2 structured review.
+- Complete: v2 structured review.
   - The JSON schema, Gemini pipeline, postprocessing, cards UI, tests, eval provider, and configuration are present.
   - Build, lint, and all 75 tests pass.
-  - The v1 structured prompt has not been evaluated and evals/RESULTS.md has no v1-prompt row or raw results.
-- Not started: v2.x through v8.
-- Next roadmap version: v2.x Prompt tuning.
+- Complete: v2.x Prompt tuning.
+  - `review.v2` is active in lib/review/config.ts.
+  - Results and repeated-run data are in evals/RESULTS.md.
+- Known issues: case 08 has flaky float-money detection; cases 06 and 13 can produce ungrounded-evidence drops; thinking is left at the model default.
+- Not started: v3 through v8.
+- Next roadmap version: v3 Linter layer.
 
 ## Stack
 Next.js App Router, TypeScript (strict), Tailwind v4 with design tokens in app/globals.css (ink, paper, sheet, rule, pencil, highlight), fonts Atkinson Hyperlegible and JetBrains Mono, @google/genai for Gemini, Zod v4, react-markdown.

@@ -35,7 +35,8 @@ Done when: build, lint and tests pass; the app shows cards for a real review; RE
 - Create prompts/review.v2.md with targeted changes (keep v1), run the evals, and add a row to RESULTS.md. Repeat at most 3 times.
 - Don't overfit: never quote or describe specific eval cases in the prompt.
 - The app uses the best-scoring version.
-Done when: RESULTS.md has a row per prompt version and the app uses the best one.
+- Done when: RESULTS.md has a row per prompt version and the app uses the best one.
+- Complete: review.v2 is active and the v1/v2 results are recorded in [evals/RESULTS.md](../evals/RESULTS.md).
 
 ## v3: Linter layer
 - Run ESLint in the review pipeline through the ESLint Node API with an in-memory config: typescript-eslint parser, plus the recommended rules from react-hooks and jsx-a11y.
