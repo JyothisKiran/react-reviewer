@@ -1,0 +1,3089 @@
+{
+  "evalId": "eval-Chr-2026-11-27T07:26:07",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-11-27T07:26:07.235Z",
+    "prompts": [
+      {
+        "id": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "raw": "unused",
+        "label": "unused",
+        "provider": "react-reviewer-v2-linter-on",
+        "metrics": {
+          "score": 2,
+          "testPassCount": 2,
+          "testFailCount": 8,
+          "testErrorCount": 0,
+          "testCacheHitCount": 0,
+          "assertPassCount": 2,
+          "assertFailCount": 8,
+          "totalLatencyMs": 15681,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 10,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "40741e07-41ca-4a15-887b-1a84fa2642e7",
+        "latencyMs": 2069,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-0-vars-0",
+        "repeatIndex": 0,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice using an effect, while also reading from that slice.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Utilizes RTK Query for data fetching.\"],\"assumptions\":[\"The achievementsApi endpoint and achievementsSlice are correctly implemented elsewhere.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":10,\"endLine\":14,\"evidence\":\"  const achievements = useSelector(selectAchievements);\",\"title\":\"Duplicating RTK Query server state into Redux store\",\"why\":\"Copying server cache data from RTK Query into local Redux state via an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and loading state management.\",\"fix\":\"Remove the redundant Redux slice state and dispatch sync, and use the data directly from the RTK Query hook.\",\"suggestedCode\":\"  const { data: achievements } = useGetAchievementsQuery();\",\"category\":\"state-management\",\"kind\":\"bug\",\"severity\":\"high\",\"confidence\":0.95}]}",
+          "latencyMs": 2069,
+          "metadata": {
+            "rawReview": {
+              "summary": "This PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice using an effect, while also reading from that slice.",
+              "rating": "needs-improvement",
+              "readiness": "changes-required",
+              "strengths": [
+                "Utilizes RTK Query for data fetching."
+              ],
+              "assumptions": [
+                "The achievementsApi endpoint and achievementsSlice are correctly implemented elsewhere."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 10,
+                  "endLine": 14,
+                  "evidence": "  const achievements = useSelector(selectAchievements);",
+                  "title": "Duplicating RTK Query server state into Redux store",
+                  "why": "Copying server cache data from RTK Query into local Redux state via an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and loading state management.",
+                  "fix": "Remove the redundant Redux slice state and dispatch sync, and use the data directly from the RTK Query hook.",
+                  "suggestedCode": "  const { data: achievements } = useGetAchievementsQuery();",
+                  "category": "state-management",
+                  "kind": "bug",
+                  "severity": "high",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 5,
+                  "rule": "@typescript-eslint/no-unused-vars",
+                  "message": "'AchievementList' is defined but never used."
+                }
+              ],
+              "diagnostics": [],
+              "latencyMs": 402
+            },
+            "linterFindings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "linterDiagnostics": [],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 2069,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 402
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "This PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice using an effect, while also reading from that slice.",
+            "rating": "needs-improvement",
+            "readiness": "changes-required",
+            "strengths": [
+              "Utilizes RTK Query for data fetching."
+            ],
+            "assumptions": [
+              "The achievementsApi endpoint and achievementsSlice are correctly implemented elsewhere."
+            ],
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 10,
+                "endLine": 14,
+                "evidence": "  const achievements = useSelector(selectAchievements);",
+                "title": "Duplicating RTK Query server state into Redux store",
+                "why": "Copying server cache data from RTK Query into local Redux state via an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and loading state management.",
+                "fix": "Remove the redundant Redux slice state and dispatch sync, and use the data directly from the RTK Query hook.",
+                "suggestedCode": "  const { data: achievements } = useGetAchievementsQuery();",
+                "category": "state-management",
+                "kind": "bug",
+                "severity": "high",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "diagnostics": [],
+            "latencyMs": 402
+          },
+          "linterFindings": [
+            {
+              "file": "src/features/achievements/AchievementsPage.tsx",
+              "line": 5,
+              "rule": "@typescript-eslint/no-unused-vars",
+              "message": "'AchievementList' is defined but never used."
+            }
+          ],
+          "linterDiagnostics": [],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 2069,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 402
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "4a1775e3-01a2-49bb-9686-750453cb6a7e",
+        "latencyMs": 1505,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-0-vars-0",
+        "repeatIndex": 1,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an AchievementsPage component that synchronizes server state fetched via RTK Query into Redux state using an effect. This duplicates server data in client state and introduces an unnecessary synchronization step.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Uses RTK Query for data fetching.\"],\"assumptions\":[\"The achievementsApi endpoint is already set up and functioning correctly.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":10,\"evidence\":\"  const achievements = useSelector(selectAchievements);\",\"title\":\"Duplicating RTK Query server state in Redux\",\"why\":\"Storing server state fetched via RTK Query into a separate Redux slice via useEffect duplicates state and bypasses the built-in caching, automatic refetching, and normalization features of RTK Query.\",\"fix\":\"Remove the achievements slice and useSelector/useDispatch synchronization. Consume the data directly from useGetAchievementsQuery.\",\"suggestedCode\":\"  const { data: achievements = [] } = useGetAchievementsQuery();\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1505,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces an AchievementsPage component that synchronizes server state fetched via RTK Query into Redux state using an effect. This duplicates server data in client state and introduces an unnecessary synchronization step.",
+              "rating": "needs-improvement",
+              "readiness": "changes-required",
+              "strengths": [
+                "Uses RTK Query for data fetching."
+              ],
+              "assumptions": [
+                "The achievementsApi endpoint is already set up and functioning correctly."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 10,
+                  "evidence": "  const achievements = useSelector(selectAchievements);",
+                  "title": "Duplicating RTK Query server state in Redux",
+                  "why": "Storing server state fetched via RTK Query into a separate Redux slice via useEffect duplicates state and bypasses the built-in caching, automatic refetching, and normalization features of RTK Query.",
+                  "fix": "Remove the achievements slice and useSelector/useDispatch synchronization. Consume the data directly from useGetAchievementsQuery.",
+                  "suggestedCode": "  const { data: achievements = [] } = useGetAchievementsQuery();",
+                  "category": "state-management",
+                  "kind": "improvement",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 5,
+                  "rule": "@typescript-eslint/no-unused-vars",
+                  "message": "'AchievementList' is defined but never used."
+                }
+              ],
+              "diagnostics": [],
+              "latencyMs": 7
+            },
+            "linterFindings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "linterDiagnostics": [],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1505,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 7
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces an AchievementsPage component that synchronizes server state fetched via RTK Query into Redux state using an effect. This duplicates server data in client state and introduces an unnecessary synchronization step.",
+            "rating": "needs-improvement",
+            "readiness": "changes-required",
+            "strengths": [
+              "Uses RTK Query for data fetching."
+            ],
+            "assumptions": [
+              "The achievementsApi endpoint is already set up and functioning correctly."
+            ],
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 10,
+                "evidence": "  const achievements = useSelector(selectAchievements);",
+                "title": "Duplicating RTK Query server state in Redux",
+                "why": "Storing server state fetched via RTK Query into a separate Redux slice via useEffect duplicates state and bypasses the built-in caching, automatic refetching, and normalization features of RTK Query.",
+                "fix": "Remove the achievements slice and useSelector/useDispatch synchronization. Consume the data directly from useGetAchievementsQuery.",
+                "suggestedCode": "  const { data: achievements = [] } = useGetAchievementsQuery();",
+                "category": "state-management",
+                "kind": "improvement",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "diagnostics": [],
+            "latencyMs": 7
+          },
+          "linterFindings": [
+            {
+              "file": "src/features/achievements/AchievementsPage.tsx",
+              "line": 5,
+              "rule": "@typescript-eslint/no-unused-vars",
+              "message": "'AchievementList' is defined but never used."
+            }
+          ],
+          "linterDiagnostics": [],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1505,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 7
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "b3a31501-c2da-4803-be2c-6113437667da",
+        "latencyMs": 1597,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-0-vars-0",
+        "repeatIndex": 2,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an AchievementsPage component that fetches data using RTK Query and duplicates it into Redux state via an effect. This creates redundant state management since RTK Query already manages server state locally.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Uses RTK Query for data fetching.\"],\"assumptions\":[\"selectAchievements reads from a slice that duplicates data already available in the RTK Query cache.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":10,\"endLine\":14,\"evidence\":\"  const achievements = useSelector(selectAchievements);\",\"title\":\"Duplicating RTK Query server state into Redux store\",\"why\":\"Copying server data from an RTK Query hook into a separate Redux slice using an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and cache lifecycle management.\",\"fix\":\"Remove the redundant Redux slice state and use the data directly from useGetAchievementsQuery.\",\"suggestedCode\":\"  const { data: achievements = [] } = useGetAchievementsQuery();\\n  return <AchievementList items={achievements} />;\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1597,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces an AchievementsPage component that fetches data using RTK Query and duplicates it into Redux state via an effect. This creates redundant state management since RTK Query already manages server state locally.",
+              "rating": "needs-improvement",
+              "readiness": "changes-required",
+              "strengths": [
+                "Uses RTK Query for data fetching."
+              ],
+              "assumptions": [
+                "selectAchievements reads from a slice that duplicates data already available in the RTK Query cache."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 10,
+                  "endLine": 14,
+                  "evidence": "  const achievements = useSelector(selectAchievements);",
+                  "title": "Duplicating RTK Query server state into Redux store",
+                  "why": "Copying server data from an RTK Query hook into a separate Redux slice using an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and cache lifecycle management.",
+                  "fix": "Remove the redundant Redux slice state and use the data directly from useGetAchievementsQuery.",
+                  "suggestedCode": "  const { data: achievements = [] } = useGetAchievementsQuery();\n  return <AchievementList items={achievements} />;",
+                  "category": "state-management",
+                  "kind": "improvement",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 5,
+                  "rule": "@typescript-eslint/no-unused-vars",
+                  "message": "'AchievementList' is defined but never used."
+                }
+              ],
+              "diagnostics": [],
+              "latencyMs": 3
+            },
+            "linterFindings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "linterDiagnostics": [],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1597,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 3
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces an AchievementsPage component that fetches data using RTK Query and duplicates it into Redux state via an effect. This creates redundant state management since RTK Query already manages server state locally.",
+            "rating": "needs-improvement",
+            "readiness": "changes-required",
+            "strengths": [
+              "Uses RTK Query for data fetching."
+            ],
+            "assumptions": [
+              "selectAchievements reads from a slice that duplicates data already available in the RTK Query cache."
+            ],
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 10,
+                "endLine": 14,
+                "evidence": "  const achievements = useSelector(selectAchievements);",
+                "title": "Duplicating RTK Query server state into Redux store",
+                "why": "Copying server data from an RTK Query hook into a separate Redux slice using an effect duplicates state and bypasses RTK Query's built-in caching, automatic refetching, and cache lifecycle management.",
+                "fix": "Remove the redundant Redux slice state and use the data directly from useGetAchievementsQuery.",
+                "suggestedCode": "  const { data: achievements = [] } = useGetAchievementsQuery();\n  return <AchievementList items={achievements} />;",
+                "category": "state-management",
+                "kind": "improvement",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "diagnostics": [],
+            "latencyMs": 3
+          },
+          "linterFindings": [
+            {
+              "file": "src/features/achievements/AchievementsPage.tsx",
+              "line": 5,
+              "rule": "@typescript-eslint/no-unused-vars",
+              "message": "'AchievementList' is defined but never used."
+            }
+          ],
+          "linterDiagnostics": [],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1597,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 3
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "53468916-fd6c-4871-aa86-b53ee1dc002b",
+        "latencyMs": 1651,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-0-vars-0",
+        "repeatIndex": 3,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice via useEffect. This duplicates server state unnecessarily and creates redundant boilerplate given that RTK Query already manages caching and state.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Clean component structure using standard React and Redux hooks\"],\"assumptions\":[\"selectAchievements reads from a manually maintained slice rather than directly from the RTK Query cache endpoints.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":10,\"evidence\":\"  const achievements = useSelector(selectAchievements);\",\"title\":\"Duplicating RTK Query server state in Redux slice\",\"why\":\"Copying RTK Query data into manual Redux state via useEffect duplicates data storage and loses built-in cache lifecycle benefits, automatic refetching, and loading states.\",\"fix\":\"Remove the redundant slice state and dispatch call, and use the data directly from useGetAchievementsQuery.\",\"suggestedCode\":\"export function AchievementsPage() {\\n  const { data: achievements = [] } = useGetAchievementsQuery();\\n  return <AchievementList items={achievements} />;\\n}\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1651,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice via useEffect. This duplicates server state unnecessarily and creates redundant boilerplate given that RTK Query already manages caching and state.",
+              "rating": "needs-improvement",
+              "readiness": "changes-required",
+              "strengths": [
+                "Clean component structure using standard React and Redux hooks"
+              ],
+              "assumptions": [
+                "selectAchievements reads from a manually maintained slice rather than directly from the RTK Query cache endpoints."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 10,
+                  "evidence": "  const achievements = useSelector(selectAchievements);",
+                  "title": "Duplicating RTK Query server state in Redux slice",
+                  "why": "Copying RTK Query data into manual Redux state via useEffect duplicates data storage and loses built-in cache lifecycle benefits, automatic refetching, and loading states.",
+                  "fix": "Remove the redundant slice state and dispatch call, and use the data directly from useGetAchievementsQuery.",
+                  "suggestedCode": "export function AchievementsPage() {\n  const { data: achievements = [] } = useGetAchievementsQuery();\n  return <AchievementList items={achievements} />;\n}",
+                  "category": "state-management",
+                  "kind": "improvement",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 5,
+                  "rule": "@typescript-eslint/no-unused-vars",
+                  "message": "'AchievementList' is defined but never used."
+                }
+              ],
+              "diagnostics": [],
+              "latencyMs": 3
+            },
+            "linterFindings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "linterDiagnostics": [],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1651,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 3
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces an AchievementsPage component that synchronizes RTK Query server state into a Redux slice via useEffect. This duplicates server state unnecessarily and creates redundant boilerplate given that RTK Query already manages caching and state.",
+            "rating": "needs-improvement",
+            "readiness": "changes-required",
+            "strengths": [
+              "Clean component structure using standard React and Redux hooks"
+            ],
+            "assumptions": [
+              "selectAchievements reads from a manually maintained slice rather than directly from the RTK Query cache endpoints."
+            ],
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 10,
+                "evidence": "  const achievements = useSelector(selectAchievements);",
+                "title": "Duplicating RTK Query server state in Redux slice",
+                "why": "Copying RTK Query data into manual Redux state via useEffect duplicates data storage and loses built-in cache lifecycle benefits, automatic refetching, and loading states.",
+                "fix": "Remove the redundant slice state and dispatch call, and use the data directly from useGetAchievementsQuery.",
+                "suggestedCode": "export function AchievementsPage() {\n  const { data: achievements = [] } = useGetAchievementsQuery();\n  return <AchievementList items={achievements} />;\n}",
+                "category": "state-management",
+                "kind": "improvement",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "diagnostics": [],
+            "latencyMs": 3
+          },
+          "linterFindings": [
+            {
+              "file": "src/features/achievements/AchievementsPage.tsx",
+              "line": 5,
+              "rule": "@typescript-eslint/no-unused-vars",
+              "message": "'AchievementList' is defined but never used."
+            }
+          ],
+          "linterDiagnostics": [],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1651,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 3
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "e9b69aa1-027f-4db3-b2dd-d5e3aa02112c",
+        "latencyMs": 1736,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-0-vars-0",
+        "repeatIndex": 4,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces an achievements page that synchronizes RTK Query server data into Redux state via an effect. This duplicates server state into the Redux store unnecessarily and introduces an extra render cycle.\",\"rating\":\"needs-improvement\",\"readiness\":\"changes-required\",\"strengths\":[\"Uses RTK Query for data fetching.\"],\"assumptions\":[\"The selectAchievements selector reads from a manually managed Redux slice rather than directly from the RTK Query cache.\"],\"findings\":[{\"file\":\"src/features/achievements/AchievementsPage.tsx\",\"line\":10,\"evidence\":\"  const achievements = useSelector(selectAchievements);\",\"title\":\"Duplicating RTK Query server state into Redux store\",\"why\":\"Copying server state fetched by RTK Query into a separate Redux slice via useEffect duplicates state, adds unnecessary boilerplate, and forces extra render cycles when data is received.\",\"fix\":\"Remove the manual Redux slice synchronization and use the data directly from the useGetAchievementsQuery hook.\",\"suggestedCode\":\"  const { data: achievements } = useGetAchievementsQuery();\",\"category\":\"state-management\",\"kind\":\"improvement\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1736,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces an achievements page that synchronizes RTK Query server data into Redux state via an effect. This duplicates server state into the Redux store unnecessarily and introduces an extra render cycle.",
+              "rating": "needs-improvement",
+              "readiness": "changes-required",
+              "strengths": [
+                "Uses RTK Query for data fetching."
+              ],
+              "assumptions": [
+                "The selectAchievements selector reads from a manually managed Redux slice rather than directly from the RTK Query cache."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 10,
+                  "evidence": "  const achievements = useSelector(selectAchievements);",
+                  "title": "Duplicating RTK Query server state into Redux store",
+                  "why": "Copying server state fetched by RTK Query into a separate Redux slice via useEffect duplicates state, adds unnecessary boilerplate, and forces extra render cycles when data is received.",
+                  "fix": "Remove the manual Redux slice synchronization and use the data directly from the useGetAchievementsQuery hook.",
+                  "suggestedCode": "  const { data: achievements } = useGetAchievementsQuery();",
+                  "category": "state-management",
+                  "kind": "improvement",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [
+                {
+                  "file": "src/features/achievements/AchievementsPage.tsx",
+                  "line": 5,
+                  "rule": "@typescript-eslint/no-unused-vars",
+                  "message": "'AchievementList' is defined but never used."
+                }
+              ],
+              "diagnostics": [],
+              "latencyMs": 4
+            },
+            "linterFindings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "linterDiagnostics": [],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1736,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 4
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "07 server state in Redux",
+          "vars": {
+            "linter": [],
+            "path": "src/features/achievements/AchievementsPage.tsx",
+            "casefile": "evals/cases/07.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "state-management",
+                "architecture"
+              ],
+              "lines": [
+                12,
+                14
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces an achievements page that synchronizes RTK Query server data into Redux state via an effect. This duplicates server state into the Redux store unnecessarily and introduces an extra render cycle.",
+            "rating": "needs-improvement",
+            "readiness": "changes-required",
+            "strengths": [
+              "Uses RTK Query for data fetching."
+            ],
+            "assumptions": [
+              "The selectAchievements selector reads from a manually managed Redux slice rather than directly from the RTK Query cache."
+            ],
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 10,
+                "evidence": "  const achievements = useSelector(selectAchievements);",
+                "title": "Duplicating RTK Query server state into Redux store",
+                "why": "Copying server state fetched by RTK Query into a separate Redux slice via useEffect duplicates state, adds unnecessary boilerplate, and forces extra render cycles when data is received.",
+                "fix": "Remove the manual Redux slice synchronization and use the data directly from the useGetAchievementsQuery hook.",
+                "suggestedCode": "  const { data: achievements } = useGetAchievementsQuery();",
+                "category": "state-management",
+                "kind": "improvement",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [
+              {
+                "file": "src/features/achievements/AchievementsPage.tsx",
+                "line": 5,
+                "rule": "@typescript-eslint/no-unused-vars",
+                "message": "'AchievementList' is defined but never used."
+              }
+            ],
+            "diagnostics": [],
+            "latencyMs": 4
+          },
+          "linterFindings": [
+            {
+              "file": "src/features/achievements/AchievementsPage.tsx",
+              "line": 5,
+              "rule": "@typescript-eslint/no-unused-vars",
+              "message": "'AchievementList' is defined but never used."
+            }
+          ],
+          "linterDiagnostics": [],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1736,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 4
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Icon-only button missing accessible name",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "02b11ac4-eac3-4455-936c-4acbde917e25",
+        "latencyMs": 1707,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-1-vars-0",
+        "repeatIndex": 0,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"This pull request adds a new DeleteEntryButton component used in timesheet entries. The component is simple and straightforward, though it lacks an accessible label for screen readers.\",\"rating\":\"good\",\"readiness\":\"ready-with-minor-changes\",\"strengths\":[\"Clean component structure with clear props typing.\"],\"assumptions\":[\"TrashIcon does not render visible text, making an aria-label necessary for accessibility.\"],\"findings\":[{\"file\":\"src/features/timesheet/DeleteEntryButton.tsx\",\"line\":7,\"endLine\":7,\"evidence\":\"<button type=\\\"button\\\" onClick={onDelete} className=\\\"p-1 text-gray-500 hover:text-red-600\\\">\",\"title\":\"Icon-only button missing accessible name\",\"why\":\"Screen readers will not be able to announce the purpose of this button because it only contains an icon without an aria-label or accessible text.\",\"fix\":\"Add an aria-label attribute describing the action, such as aria-label=\\\"Delete entry\\\".\",\"suggestedCode\":\"<button type=\\\"button\\\" onClick={onDelete} aria-label=\\\"Delete entry\\\" className=\\\"p-1 text-gray-500 hover:text-red-600\\\">\",\"category\":\"accessibility\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1707,
+          "metadata": {
+            "rawReview": {
+              "summary": "This pull request adds a new DeleteEntryButton component used in timesheet entries. The component is simple and straightforward, though it lacks an accessible label for screen readers.",
+              "rating": "good",
+              "readiness": "ready-with-minor-changes",
+              "strengths": [
+                "Clean component structure with clear props typing."
+              ],
+              "assumptions": [
+                "TrashIcon does not render visible text, making an aria-label necessary for accessibility."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "line": 7,
+                  "endLine": 7,
+                  "evidence": "<button type=\"button\" onClick={onDelete} className=\"p-1 text-gray-500 hover:text-red-600\">",
+                  "title": "Icon-only button missing accessible name",
+                  "why": "Screen readers will not be able to announce the purpose of this button because it only contains an icon without an aria-label or accessible text.",
+                  "fix": "Add an aria-label attribute describing the action, such as aria-label=\"Delete entry\".",
+                  "suggestedCode": "<button type=\"button\" onClick={onDelete} aria-label=\"Delete entry\" className=\"p-1 text-gray-500 hover:text-red-600\">",
+                  "category": "accessibility",
+                  "kind": "bug",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [],
+              "diagnostics": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "status": "could not lint",
+                  "reason": "parse-failure",
+                  "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                  "line": 3,
+                  "column": 6
+                }
+              ],
+              "latencyMs": 2
+            },
+            "linterFindings": [],
+            "linterDiagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1707,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 2
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "This pull request adds a new DeleteEntryButton component used in timesheet entries. The component is simple and straightforward, though it lacks an accessible label for screen readers.",
+            "rating": "good",
+            "readiness": "ready-with-minor-changes",
+            "strengths": [
+              "Clean component structure with clear props typing."
+            ],
+            "assumptions": [
+              "TrashIcon does not render visible text, making an aria-label necessary for accessibility."
+            ],
+            "findings": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "line": 7,
+                "endLine": 7,
+                "evidence": "<button type=\"button\" onClick={onDelete} className=\"p-1 text-gray-500 hover:text-red-600\">",
+                "title": "Icon-only button missing accessible name",
+                "why": "Screen readers will not be able to announce the purpose of this button because it only contains an icon without an aria-label or accessible text.",
+                "fix": "Add an aria-label attribute describing the action, such as aria-label=\"Delete entry\".",
+                "suggestedCode": "<button type=\"button\" onClick={onDelete} aria-label=\"Delete entry\" className=\"p-1 text-gray-500 hover:text-red-600\">",
+                "category": "accessibility",
+                "kind": "bug",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [],
+            "diagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "latencyMs": 2
+          },
+          "linterFindings": [],
+          "linterDiagnostics": [
+            {
+              "file": "src/features/timesheet/DeleteEntryButton.tsx",
+              "status": "could not lint",
+              "reason": "parse-failure",
+              "message": "Could not lint this file: Parsing error: Unexpected token Props",
+              "line": 3,
+              "column": 6
+            }
+          ],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1707,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 2
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "fd0fe577-dcc7-4f1f-a952-1aa9a23dd5a6",
+        "latencyMs": 1197,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-1-vars-0",
+        "repeatIndex": 1,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. There are no critical issues or functional bugs in this simple implementation.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Clean and concise component implementation\",\"Proper use of type definitions for props\"],\"assumptions\":[\"Accessible labels or tooltips for the icon-only button are handled elsewhere or considered unnecessary for this context\"],\"findings\":[]}",
+          "latencyMs": 1197,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. There are no critical issues or functional bugs in this simple implementation.",
+              "rating": "good",
+              "readiness": "ready",
+              "strengths": [
+                "Clean and concise component implementation",
+                "Proper use of type definitions for props"
+              ],
+              "assumptions": [
+                "Accessible labels or tooltips for the icon-only button are handled elsewhere or considered unnecessary for this context"
+              ],
+              "findings": []
+            },
+            "linter": {
+              "findings": [],
+              "diagnostics": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "status": "could not lint",
+                  "reason": "parse-failure",
+                  "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                  "line": 3,
+                  "column": 6
+                }
+              ],
+              "latencyMs": 1
+            },
+            "linterFindings": [],
+            "linterDiagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1197,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 1
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. There are no critical issues or functional bugs in this simple implementation.",
+            "rating": "good",
+            "readiness": "ready",
+            "strengths": [
+              "Clean and concise component implementation",
+              "Proper use of type definitions for props"
+            ],
+            "assumptions": [
+              "Accessible labels or tooltips for the icon-only button are handled elsewhere or considered unnecessary for this context"
+            ],
+            "findings": []
+          },
+          "linter": {
+            "findings": [],
+            "diagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "latencyMs": 1
+          },
+          "linterFindings": [],
+          "linterDiagnostics": [
+            {
+              "file": "src/features/timesheet/DeleteEntryButton.tsx",
+              "status": "could not lint",
+              "reason": "parse-failure",
+              "message": "Could not lint this file: Parsing error: Unexpected token Props",
+              "line": 3,
+              "column": 6
+            }
+          ],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1197,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 1
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Caught: Icon-only button missing accessible name",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "e0b06a0b-f386-4964-82ad-95daa42f0691",
+        "latencyMs": 1525,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-1-vars-0",
+        "repeatIndex": 2,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a DeleteEntryButton component using an icon-only layout. No immediate critical bugs are present, but it lacks an accessible label for assistive technologies.\",\"rating\":\"acceptable\",\"readiness\":\"ready-with-minor-changes\",\"strengths\":[\"Clean component structure with clear props typing.\",\"Correct use of explicit type=\\\"button\\\".\"],\"assumptions\":[\"The TrashIcon component does not inherently render text or an aria-label.\"],\"findings\":[{\"file\":\"src/features/timesheet/DeleteEntryButton.tsx\",\"line\":7,\"endLine\":9,\"evidence\":\"    <button type=\\\"button\\\" onClick={onDelete} className=\\\"p-1 text-gray-500 hover:text-red-600\\\">\",\"title\":\"Icon-only button missing accessible name\",\"why\":\"Screen readers will not be able to announce the purpose of the button because it contains only a graphical icon without an aria-label or screen-reader-only text.\",\"fix\":\"Add an aria-label to the button describing its action, such as aria-label=\\\"Delete entry\\\".\",\"suggestedCode\":\"    <button type=\\\"button\\\" onClick={onDelete} aria-label=\\\"Delete entry\\\" className=\\\"p-1 text-gray-500 hover:text-red-600\\\">\",\"category\":\"accessibility\",\"kind\":\"bug\",\"severity\":\"medium\",\"confidence\":0.95}]}",
+          "latencyMs": 1525,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces a DeleteEntryButton component using an icon-only layout. No immediate critical bugs are present, but it lacks an accessible label for assistive technologies.",
+              "rating": "acceptable",
+              "readiness": "ready-with-minor-changes",
+              "strengths": [
+                "Clean component structure with clear props typing.",
+                "Correct use of explicit type=\"button\"."
+              ],
+              "assumptions": [
+                "The TrashIcon component does not inherently render text or an aria-label."
+              ],
+              "findings": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "line": 7,
+                  "endLine": 9,
+                  "evidence": "    <button type=\"button\" onClick={onDelete} className=\"p-1 text-gray-500 hover:text-red-600\">",
+                  "title": "Icon-only button missing accessible name",
+                  "why": "Screen readers will not be able to announce the purpose of the button because it contains only a graphical icon without an aria-label or screen-reader-only text.",
+                  "fix": "Add an aria-label to the button describing its action, such as aria-label=\"Delete entry\".",
+                  "suggestedCode": "    <button type=\"button\" onClick={onDelete} aria-label=\"Delete entry\" className=\"p-1 text-gray-500 hover:text-red-600\">",
+                  "category": "accessibility",
+                  "kind": "bug",
+                  "severity": "medium",
+                  "confidence": 0.95
+                }
+              ]
+            },
+            "linter": {
+              "findings": [],
+              "diagnostics": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "status": "could not lint",
+                  "reason": "parse-failure",
+                  "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                  "line": 3,
+                  "column": 6
+                }
+              ],
+              "latencyMs": 1
+            },
+            "linterFindings": [],
+            "linterDiagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1525,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 1
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces a DeleteEntryButton component using an icon-only layout. No immediate critical bugs are present, but it lacks an accessible label for assistive technologies.",
+            "rating": "acceptable",
+            "readiness": "ready-with-minor-changes",
+            "strengths": [
+              "Clean component structure with clear props typing.",
+              "Correct use of explicit type=\"button\"."
+            ],
+            "assumptions": [
+              "The TrashIcon component does not inherently render text or an aria-label."
+            ],
+            "findings": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "line": 7,
+                "endLine": 9,
+                "evidence": "    <button type=\"button\" onClick={onDelete} className=\"p-1 text-gray-500 hover:text-red-600\">",
+                "title": "Icon-only button missing accessible name",
+                "why": "Screen readers will not be able to announce the purpose of the button because it contains only a graphical icon without an aria-label or screen-reader-only text.",
+                "fix": "Add an aria-label to the button describing its action, such as aria-label=\"Delete entry\".",
+                "suggestedCode": "    <button type=\"button\" onClick={onDelete} aria-label=\"Delete entry\" className=\"p-1 text-gray-500 hover:text-red-600\">",
+                "category": "accessibility",
+                "kind": "bug",
+                "severity": "medium",
+                "confidence": 0.95
+              }
+            ]
+          },
+          "linter": {
+            "findings": [],
+            "diagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "latencyMs": 1
+          },
+          "linterFindings": [],
+          "linterDiagnostics": [
+            {
+              "file": "src/features/timesheet/DeleteEntryButton.tsx",
+              "status": "could not lint",
+              "reason": "parse-failure",
+              "message": "Could not lint this file: Parsing error: Unexpected token Props",
+              "line": 3,
+              "column": 6
+            }
+          ],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1525,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 1
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "b8e73696-7ccc-4a34-b38c-79dcdec11785",
+        "latencyMs": 1279,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-1-vars-0",
+        "repeatIndex": 3,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a simple DeleteEntryButton component using an icon for timesheet entry deletion. No issues or risks were found in this minimal change.\",\"rating\":\"excellent\",\"readiness\":\"ready\",\"strengths\":[\"Clean and concise component implementation\",\"Explicitly sets button type to prevent default form submission behaviors\"],\"assumptions\":[\"The TrashIcon component handles its own accessibility attributes or is purely decorative alongside a screen-reader label added elsewhere.\"],\"findings\":[]}",
+          "latencyMs": 1279,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces a simple DeleteEntryButton component using an icon for timesheet entry deletion. No issues or risks were found in this minimal change.",
+              "rating": "excellent",
+              "readiness": "ready",
+              "strengths": [
+                "Clean and concise component implementation",
+                "Explicitly sets button type to prevent default form submission behaviors"
+              ],
+              "assumptions": [
+                "The TrashIcon component handles its own accessibility attributes or is purely decorative alongside a screen-reader label added elsewhere."
+              ],
+              "findings": []
+            },
+            "linter": {
+              "findings": [],
+              "diagnostics": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "status": "could not lint",
+                  "reason": "parse-failure",
+                  "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                  "line": 3,
+                  "column": 6
+                }
+              ],
+              "latencyMs": 0
+            },
+            "linterFindings": [],
+            "linterDiagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1279,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 0
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces a simple DeleteEntryButton component using an icon for timesheet entry deletion. No issues or risks were found in this minimal change.",
+            "rating": "excellent",
+            "readiness": "ready",
+            "strengths": [
+              "Clean and concise component implementation",
+              "Explicitly sets button type to prevent default form submission behaviors"
+            ],
+            "assumptions": [
+              "The TrashIcon component handles its own accessibility attributes or is purely decorative alongside a screen-reader label added elsewhere."
+            ],
+            "findings": []
+          },
+          "linter": {
+            "findings": [],
+            "diagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "latencyMs": 0
+          },
+          "linterFindings": [],
+          "linterDiagnostics": [
+            {
+              "file": "src/features/timesheet/DeleteEntryButton.tsx",
+              "status": "could not lint",
+              "reason": "parse-failure",
+              "message": "Could not lint this file: Parsing error: Unexpected token Props",
+              "line": 3,
+              "column": 6
+            }
+          ],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1279,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 0
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Missed planted issue",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Missed planted issue",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Missed planted issue",
+              "assertion": {
+                "type": "javascript",
+                "value": "file://evals/assert.js"
+              }
+            }
+          ]
+        },
+        "id": "4aa5e239-fae3-4e32-a960-8e573bbf7eb8",
+        "latencyMs": 1415,
+        "namedScores": {},
+        "prompt": {
+          "raw": "unused",
+          "label": "unused",
+          "config": {}
+        },
+        "promptId": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "promptIdx": 0,
+        "repeatGroupId": "test-1-vars-0",
+        "repeatIndex": 4,
+        "provider": {
+          "id": "react-reviewer-v2-linter-on",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"summary\":\"The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. The implementation is clean and straightforward, with no major correctness or accessibility blockers detected.\",\"rating\":\"good\",\"readiness\":\"ready\",\"strengths\":[\"Explicitly sets type=\\\"button\\\" on the button element to prevent accidental form submissions.\",\"Clean, minimal component structure with well-defined props.\"],\"assumptions\":[\"The TrashIcon component handles its own presentation or aria-hidden attributes correctly.\",\"Accessibility concerns like aria-label are handled by a wrapper or parent where this button is consumed since it is icon-only.\"],\"findings\":[]}",
+          "latencyMs": 1415,
+          "metadata": {
+            "rawReview": {
+              "summary": "The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. The implementation is clean and straightforward, with no major correctness or accessibility blockers detected.",
+              "rating": "good",
+              "readiness": "ready",
+              "strengths": [
+                "Explicitly sets type=\"button\" on the button element to prevent accidental form submissions.",
+                "Clean, minimal component structure with well-defined props."
+              ],
+              "assumptions": [
+                "The TrashIcon component handles its own presentation or aria-hidden attributes correctly.",
+                "Accessibility concerns like aria-label are handled by a wrapper or parent where this button is consumed since it is icon-only."
+              ],
+              "findings": []
+            },
+            "linter": {
+              "findings": [],
+              "diagnostics": [
+                {
+                  "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                  "status": "could not lint",
+                  "reason": "parse-failure",
+                  "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                  "line": 3,
+                  "column": 6
+                }
+              ],
+              "latencyMs": 1
+            },
+            "linterFindings": [],
+            "linterDiagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "dropped": [],
+            "meta": {
+              "model": "gemini-3.5-flash-lite",
+              "modelVersion": "gemini-3.5-flash-lite",
+              "promptVersion": "review.v2",
+              "latencyMs": 1415,
+              "calls": 1,
+              "validationRetries": 0,
+              "lintLatencyMs": 1
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "19 icon button without name",
+          "vars": {
+            "linter": [],
+            "path": "src/features/timesheet/DeleteEntryButton.tsx",
+            "casefile": "evals/cases/19.txt",
+            "expect": {
+              "type": "issue",
+              "categories": [
+                "accessibility"
+              ],
+              "lines": [
+                7,
+                8
+              ],
+              "minSeverity": "medium"
+            }
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "file://evals/assert.js"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "linter": [],
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        },
+        "metadata": {
+          "rawReview": {
+            "summary": "The PR introduces a DeleteEntryButton component that triggers a deletion callback via an icon button. The implementation is clean and straightforward, with no major correctness or accessibility blockers detected.",
+            "rating": "good",
+            "readiness": "ready",
+            "strengths": [
+              "Explicitly sets type=\"button\" on the button element to prevent accidental form submissions.",
+              "Clean, minimal component structure with well-defined props."
+            ],
+            "assumptions": [
+              "The TrashIcon component handles its own presentation or aria-hidden attributes correctly.",
+              "Accessibility concerns like aria-label are handled by a wrapper or parent where this button is consumed since it is icon-only."
+            ],
+            "findings": []
+          },
+          "linter": {
+            "findings": [],
+            "diagnostics": [
+              {
+                "file": "src/features/timesheet/DeleteEntryButton.tsx",
+                "status": "could not lint",
+                "reason": "parse-failure",
+                "message": "Could not lint this file: Parsing error: Unexpected token Props",
+                "line": 3,
+                "column": 6
+              }
+            ],
+            "latencyMs": 1
+          },
+          "linterFindings": [],
+          "linterDiagnostics": [
+            {
+              "file": "src/features/timesheet/DeleteEntryButton.tsx",
+              "status": "could not lint",
+              "reason": "parse-failure",
+              "message": "Could not lint this file: Parsing error: Unexpected token Props",
+              "line": 3,
+              "column": 6
+            }
+          ],
+          "dropped": [],
+          "meta": {
+            "model": "gemini-3.5-flash-lite",
+            "modelVersion": "gemini-3.5-flash-lite",
+            "promptVersion": "review.v2",
+            "latencyMs": 1415,
+            "calls": 1,
+            "validationRetries": 0,
+            "lintLatencyMs": 1
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 8,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 19122,
+      "evaluationDurationMs": 19122
+    },
+    "repeatStability": {
+      "totalGroups": 2,
+      "unstableGroups": 1,
+      "groupsWithErrors": 0,
+      "cachedResults": 0,
+      "groups": [
+        {
+          "repeatGroupId": "test-0-vars-0",
+          "promptIdx": 0,
+          "provider": {
+            "id": "react-reviewer-v2-linter-on",
+            "label": ""
+          },
+          "description": "07 server state in Redux",
+          "promptLabel": "unused",
+          "repetitions": 5,
+          "passed": 0,
+          "failed": 5,
+          "errors": 0,
+          "cached": 0,
+          "unstable": false,
+          "passRate": 0,
+          "passRateConfidenceInterval": {
+            "confidenceLevel": 0.95,
+            "lower": 0,
+            "upper": 0.43448246478317476
+          }
+        },
+        {
+          "repeatGroupId": "test-1-vars-0",
+          "promptIdx": 0,
+          "provider": {
+            "id": "react-reviewer-v2-linter-on",
+            "label": ""
+          },
+          "description": "19 icon button without name",
+          "promptLabel": "unused",
+          "repetitions": 5,
+          "passed": 2,
+          "failed": 3,
+          "errors": 0,
+          "cached": 0,
+          "unstable": true,
+          "passRate": 0.4,
+          "passRateConfidenceInterval": {
+            "confidenceLevel": 0.95,
+            "lower": 0.11762077423264783,
+            "upper": 0.769275718723987
+          }
+        }
+      ]
+    }
+  },
+  "config": {
+    "description": "React reviewer evals (30 cases)",
+    "prompts": [
+      "unused"
+    ],
+    "providers": [
+      "file://evals/provider.ts"
+    ],
+    "tests": [
+      {
+        "description": "01 derived state in effect",
+        "vars": {
+          "path": "src/features/profile/ProfileHeader.tsx",
+          "casefile": "evals/cases/01.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react"
+            ],
+            "lines": [
+              6,
+              10
+            ],
+            "minSeverity": "low"
+          }
+        }
+      },
+      {
+        "description": "02 search request race",
+        "vars": {
+          "path": "src/features/search/useEmployeeSearch.ts",
+          "casefile": "evals/cases/02.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              7,
+              11
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "03 XSS",
+        "vars": {
+          "path": "src/features/announcements/AnnouncementCard.tsx",
+          "casefile": "evals/cases/03.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              8,
+              8
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "04 non-null assertion",
+        "vars": {
+          "path": "src/features/timesheet/SelectedEmployee.tsx",
+          "casefile": "evals/cases/04.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              6,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "05 index keys",
+        "vars": {
+          "path": "src/features/budget/LineItems.tsx",
+          "casefile": "evals/cases/05.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              11,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "06 inaccessible dialog",
+        "vars": {
+          "path": "src/components/ConfirmDialog.tsx",
+          "casefile": "evals/cases/06.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "07 server state in Redux",
+        "vars": {
+          "path": "src/features/achievements/AchievementsPage.tsx",
+          "casefile": "evals/cases/07.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "architecture"
+            ],
+            "lines": [
+              12,
+              14
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "08 injection + float bug",
+        "vars": {
+          "path": "src/features/payments/toPaise.ts",
+          "casefile": "evals/cases/08.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness"
+            ],
+            "lines": [
+              5,
+              5
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "12 listener leak",
+        "vars": {
+          "path": "src/hooks/useWindowWidth.ts",
+          "casefile": "evals/cases/12.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "correctness",
+              "performance"
+            ],
+            "lines": [
+              6,
+              9
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "13 mutated state",
+        "vars": {
+          "path": "src/features/timesheet/EntryList.tsx",
+          "casefile": "evals/cases/13.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "state-management",
+              "react",
+              "correctness"
+            ],
+            "lines": [
+              8,
+              9
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "14 double submit",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/14.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "correctness",
+              "api"
+            ],
+            "lines": [
+              8,
+              18
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "15 secret in client",
+        "vars": {
+          "path": "src/features/payments/verifyPayment.ts",
+          "casefile": "evals/cases/15.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              5,
+              7
+            ],
+            "minSeverity": "high"
+          }
+        }
+      },
+      {
+        "description": "16 mutation result ignored",
+        "vars": {
+          "path": "src/features/timesheet/SaveEntryButton.tsx",
+          "casefile": "evals/cases/16.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "correctness"
+            ],
+            "lines": [
+              9,
+              11
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "17 non-exhaustive switch",
+        "vars": {
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/17.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "typescript",
+              "correctness"
+            ],
+            "lines": [
+              3,
+              10
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "18 large list",
+        "vars": {
+          "path": "src/features/directory/EmployeeDirectory.tsx",
+          "casefile": "evals/cases/18.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "performance"
+            ],
+            "lines": [
+              9,
+              21
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "19 icon button without name",
+        "vars": {
+          "path": "src/features/timesheet/DeleteEntryButton.tsx",
+          "casefile": "evals/cases/19.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "accessibility"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "20 un-awaited waitFor",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/20.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "testing"
+            ],
+            "lines": [
+              17,
+              17
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "21 missing invalidation",
+        "vars": {
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/21.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "api",
+              "state-management"
+            ],
+            "lines": [
+              13,
+              15
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "22 stale state from props",
+        "vars": {
+          "path": "src/features/employees/EditEmployeeForm.tsx",
+          "casefile": "evals/cases/22.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "react",
+              "state-management",
+              "correctness"
+            ],
+            "lines": [
+              7,
+              8
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "23 open redirect",
+        "vars": {
+          "path": "src/features/auth/LoginPage.tsx",
+          "casefile": "evals/cases/23.txt",
+          "expect": {
+            "type": "issue",
+            "categories": [
+              "security"
+            ],
+            "lines": [
+              9,
+              13
+            ],
+            "minSeverity": "medium"
+          }
+        }
+      },
+      {
+        "description": "09 linter dedupe",
+        "vars": {
+          "path": "src/utils/parseError.ts",
+          "casefile": "evals/cases/09.txt",
+          "linter": [
+            {
+              "file": "src/utils/parseError.ts",
+              "line": 1,
+              "rule": "@typescript-eslint/no-explicit-any",
+              "message": "Unexpected any. Specify a different type."
+            }
+          ],
+          "expect": {
+            "type": "clean",
+            "linterLine": 1,
+            "linterCategory": "typescript"
+          }
+        }
+      },
+      {
+        "description": "10 clean RTK Query component",
+        "vars": {
+          "path": "src/features/timesheet/TimesheetWeek.tsx",
+          "casefile": "evals/cases/10.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "11 clean meter",
+        "vars": {
+          "path": "src/features/budget/BudgetMeter.tsx",
+          "casefile": "evals/cases/11.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "24 clean debounce hook",
+        "vars": {
+          "path": "src/hooks/useDebouncedValue.ts",
+          "casefile": "evals/cases/24.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "25 clean exhaustive switch",
+        "vars": {
+          "path": "src/features/achievements/statusLabel.ts",
+          "casefile": "evals/cases/25.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "26 clean API slice",
+        "vars": {
+          "path": "src/features/timesheet/timesheetApi.ts",
+          "casefile": "evals/cases/26.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "27 clean form",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.tsx",
+          "casefile": "evals/cases/27.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "28 clean tests",
+        "vars": {
+          "path": "src/features/leave/LeaveRequestForm.test.tsx",
+          "casefile": "evals/cases/28.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "29 clean slice (Immer trap)",
+        "vars": {
+          "path": "src/features/filters/filtersSlice.ts",
+          "casefile": "evals/cases/29.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      },
+      {
+        "description": "30 clean list",
+        "vars": {
+          "path": "src/features/achievements/AchievementList.tsx",
+          "casefile": "evals/cases/30.txt",
+          "expect": {
+            "type": "clean"
+          }
+        }
+      }
+    ],
+    "outputPath": [
+      "evals/results/v2-linter-on-cases07-19-repeat5-2026-11-27.json"
+    ],
+    "extensions": [],
+    "evaluateOptions": {
+      "maxConcurrency": 1,
+      "delay": 2000,
+      "timeoutMs": 130000,
+      "cache": false
+    },
+    "defaultTest": {
+      "vars": {
+        "linter": []
+      },
+      "assert": [
+        {
+          "type": "javascript",
+          "value": "file://evals/assert.js"
+        }
+      ]
+    },
+    "basePath": "C:\\Users\\CL-2407-B0X10\\Documents\\react-reviewer"
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.126.0",
+    "nodeVersion": "v22.22.2",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-11-27T07:26:26.619Z",
+    "evaluationCreatedAt": "2026-11-27T07:26:07.235Z"
+  },
+  "vars": [
+    "linter",
+    "path",
+    "casefile",
+    "expect"
+  ],
+  "runtimeOptions": {
+    "maxConcurrency": 1,
+    "showProgressBar": true,
+    "eventSource": "cli",
+    "timeoutMs": 130000,
+    "cache": false,
+    "repeat": 5
+  }
+}

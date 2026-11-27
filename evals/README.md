@@ -38,7 +38,7 @@ node evals/summarize.js evals/results/<prompt-version>-<date>.json
 
 - Issue cases: **Caught** if a finding in an expected category starts inside the expected lines, at or above the minimum severity. Otherwise **Missed**. A missed case with a finding in the expected lines but the wrong severity or category is reported as **Partial**, with the reason.
 - Clean cases: **Clean**, or **Noisy** if the review raises any finding at Medium or higher.
-- **Case 09** (the linter already flagged `any`) gets the linter finding in `<linter_findings>`. Until v3 it is reported but left out of the false-positive rate, which is noisy ÷ 9 (÷ 10 from v3).
+- **Case 09** (the linter already flagged `any`) gets the linter finding in `<linter_findings>`. From v3 onward it is included in the false-positive denominator, noisy ÷ 10.
 
 ## Manual baseline (gem-original)
 

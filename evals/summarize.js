@@ -11,8 +11,6 @@
 const fs = require("node:fs");
 
 const RANK = { suggestion: 0, low: 1, medium: 2, high: 3, critical: 4 };
-const LINTER_CASE = "09"; // left out of the false-positive rate until v3
-
 const files = process.argv.slice(2);
 if (!files.length) {
   console.error("Usage: node evals/summarize.js <results.json> [more-results.json ...]");
@@ -76,7 +74,7 @@ for (const r of rows.sort((a, b) => caseOf(a).localeCompare(caseOf(b)))) {
   const dropped = meta.dropped ?? [];
 
   if (exp.type === "issue") planted.total++;
-  else if (id !== LINTER_CASE) clean.total++;
+  else clean.total++;
 
   if (r.response?.error || !review) {
     errors.push({ id, name: nameOf(r), error: r.response?.error ?? r.error ?? "No output" });
@@ -107,8 +105,8 @@ for (const r of rows.sort((a, b) => caseOf(a).localeCompare(caseOf(b)))) {
   } else {
     const bad = review.findings.filter((f) => RANK[f.severity] >= RANK.medium || (exp.linterLine && f.line === exp.linterLine && f.category === exp.linterCategory));
     const entry = { id, name: nameOf(r), pass: r.success, bad };
-    if (id === LINTER_CASE) clean.linter = entry;
-    else if (!r.success) clean.noisy.push(entry);
+    if (id === "09") clean.linter = entry;
+    if (!r.success) clean.noisy.push(entry);
   }
 }
 
@@ -129,7 +127,7 @@ const reasonCount = (reason) => partialReasons.filter((x) => x === reason).lengt
 
 out(`Recall: ${planted.caught.length}/${planted.total} (${pct(planted.caught.length, planted.total)})`);
 out(`Partial: ${planted.partial.length} (severity: ${reasonCount("severity")}, category: ${reasonCount("category")}, both: ${reasonCount("category + severity")})`);
-out(`False-positive rate: ${clean.noisy.length}/${clean.total} (${pct(clean.noisy.length, clean.total)}), excluding case ${LINTER_CASE}`);
+out(`False-positive rate: ${clean.noisy.length}/${clean.total} (${pct(clean.noisy.length, clean.total)}), including case 09`);
 out(`Dropped: ${dropTotals["low-confidence"]} low-confidence, ${dropTotals.ungrounded} ungrounded, ${dropTotals["over-cap"]} over cap, of ${rawFindings} raw findings`);
 out();
 
@@ -164,7 +162,7 @@ if (clean.noisy.length) {
 }
 
 if (clean.linter) {
-  out(`## Case ${LINTER_CASE} (linter dedupe, not in the rate)`);
+  out(`## Case 09 (linter dedupe, included in the rate)`);
   out(`- ${clean.linter.pass ? "Passed" : `Failed: ${clean.linter.bad.map(describe).join("; ")}`}`);
   out();
 }
