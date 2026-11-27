@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { annotate } from "./annotate";
 import { MAX_FINDINGS, postprocess } from "./postprocess";
+import type { LinterFinding } from "./prompt";
 import type { Finding, Review } from "./schema";
 
 const code = [
@@ -102,6 +103,63 @@ describe("postprocess", () => {
       expect(result.review.findings).toEqual([]);
       expect(result.dropped[0].reason).toBe("ungrounded");
       expect(result.dropped[0].detail).toContain(detail);
+    });
+  });
+
+  describe("linter deduplication", () => {
+    it("drops a mapped model duplicate with the explicit reason", () => {
+      const { addedLines: lines } = annotate([
+        { path: "src/any.ts", content: "const value: any = source;" },
+      ]);
+      const linterFinding: LinterFinding = {
+        file: "src/any.ts",
+        line: 1,
+        rule: "@typescript-eslint/no-explicit-any",
+        message: "Unexpected any.",
+      };
+      const modelFinding = finding({
+        file: "src/any.ts",
+        line: 1,
+        evidence: "value: any",
+        title: "Avoid the any type",
+        category: "typescript",
+      });
+
+      const result = postprocess(review([modelFinding]), lines, [linterFinding]);
+
+      expect(result.review.findings).toEqual([]);
+      expect(result.dropped).toEqual([
+        {
+          reason: "duplicate of linter finding",
+          detail: "Matches @typescript-eslint/no-explicit-any at src/any.ts:1.",
+          finding: modelFinding,
+        },
+      ]);
+    });
+
+    it("keeps an unrelated model finding on the same line", () => {
+      const { addedLines: lines } = annotate([
+        { path: "src/any.ts", content: "const value: any = source;" },
+      ]);
+      const linterFinding: LinterFinding = {
+        file: "src/any.ts",
+        line: 1,
+        rule: "@typescript-eslint/no-explicit-any",
+        message: "Unexpected any.",
+      };
+      const modelFinding = finding({
+        file: "src/any.ts",
+        line: 1,
+        evidence: "value: any",
+        title: "Null assertion can fail",
+        why: "Any assertion can also bypass a runtime guard.",
+        category: "typescript",
+      });
+
+      const result = postprocess(review([modelFinding]), lines, [linterFinding]);
+
+      expect(result.review.findings).toEqual([modelFinding]);
+      expect(result.dropped).toEqual([]);
     });
   });
 

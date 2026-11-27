@@ -1,6 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { ESLint } from "eslint";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { GeminiClient } from "./gemini";
-import { reviewFiles } from "./index";
+import { ReviewError, reviewFiles } from "./index";
 import type { Finding } from "./schema";
 
 const file = { path: "src/total.ts", content: "let sum = 0;\nfor (const i of items) sum += i.price;\n" };
@@ -25,6 +26,10 @@ function fakeClient(findings: Finding[]) {
 }
 
 describe("reviewFiles", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("annotates, calls Gemini, and postprocesses", async () => {
     const grounded = { ...base, title: "Float sum", evidence: "sum += i.price" };
     const madeUp = { ...base, title: "Made up", evidence: "items.reduce(" };
@@ -42,9 +47,58 @@ describe("reviewFiles", () => {
 
   it("passes linter findings through, and None when there are none", async () => {
     const { client, prompts } = fakeClient([]);
-    await reviewFiles([file], { gemini: { client } });
-    await reviewFiles([file], { linter: [{ file: file.path, line: 1, rule: "prefer-const", message: "Use const." }], gemini: { client } });
+    const cleanFile = { path: "src/clean.ts", content: "export const clean = 1;" };
+    await reviewFiles([cleanFile], { gemini: { client } });
+    await reviewFiles(
+      [cleanFile],
+      { linter: [{ file: cleanFile.path, line: 1, rule: "prefer-const", message: "Use const." }], gemini: { client } },
+    );
     expect(prompts[0]).toContain("<linter_findings>\nNone\n</linter_findings>");
     expect(prompts[1]).toContain('"rule": "prefer-const"');
+  });
+
+  it("reports unsupported and unparsable files but continues the review", async () => {
+    const files = [
+      { path: "src/valid.ts", content: "const value: any = 1;" },
+      { path: "src/broken.tsx", content: "export function (" },
+      { path: "README.md", content: "# Notes" },
+    ];
+    const { client, prompts } = fakeClient([]);
+
+    const result = await reviewFiles(files, { gemini: { client } });
+
+    expect(prompts).toHaveLength(1);
+    expect(result.linter.findings).toContainEqual(
+      expect.objectContaining({ file: "src/valid.ts", line: 1, rule: "@typescript-eslint/no-explicit-any" }),
+    );
+    expect(result.linter.diagnostics).toEqual([
+      expect.objectContaining({
+        file: "src/broken.tsx",
+        status: "could not lint",
+        reason: "parse-failure",
+      }),
+      expect.objectContaining({
+        file: "README.md",
+        status: "could not lint",
+        reason: "unsupported-file-type",
+      }),
+    ]);
+  });
+
+  it("includes lint time in the shared review deadline", async () => {
+    let time = 0;
+    const { client, prompts } = fakeClient([]);
+    vi.spyOn(ESLint.prototype, "lintText").mockImplementation(async () => {
+      time = 1_500;
+      return [];
+    });
+
+    await expect(
+      reviewFiles([file], {
+        gemini: { client, timeoutMs: 11_000, now: () => time },
+      }),
+    ).rejects.toMatchObject<Partial<ReviewError>>({ code: "timeout" });
+
+    expect(prompts).toEqual([]);
   });
 });

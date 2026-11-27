@@ -19,7 +19,8 @@ function result(findings: Finding[], extra: Partial<ReviewResult["review"]> = {}
       ...extra,
     },
     dropped: [],
-    meta: { model: "m", promptVersion: "review.v1", latencyMs: 1, calls: 1, validationRetries: 0 },
+    meta: { model: "m", promptVersion: "review.v1", latencyMs: 1, calls: 1, validationRetries: 0, lintLatencyMs: 0 },
+    linter: { findings: [], diagnostics: [], latencyMs: 0 },
   };
 }
 

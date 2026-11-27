@@ -142,14 +142,18 @@ export type GenerateResult = {
 
 type Context = Required<Omit<GenerateOptions, "timeoutMs">> & { deadline: number; system: string; calls: number };
 
-export async function generateReview(prompt: BuiltPrompt, options: GenerateOptions = {}): Promise<GenerateResult> {
+export async function generateReview(
+  prompt: BuiltPrompt,
+  options: GenerateOptions = {},
+  deadline?: number,
+): Promise<GenerateResult> {
   const now = options.now ?? Date.now;
   const ctx: Context = {
     client: options.client ?? getGeminiClient(),
     now,
     sleep: options.sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms))),
     random: options.random ?? Math.random,
-    deadline: now() + (options.timeoutMs ?? REVIEW_TIMEOUT_MS),
+    deadline: deadline ?? now() + (options.timeoutMs ?? REVIEW_TIMEOUT_MS),
     system: prompt.system,
     calls: 0,
   };

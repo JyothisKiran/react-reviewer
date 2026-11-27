@@ -19,7 +19,8 @@ const file = { path: "src/a.ts", content: "const a = 1;" };
 const result: ReviewResult = {
   review: { summary: "s", rating: "good", readiness: "ready", strengths: [], assumptions: [], findings: [] },
   dropped: [],
-  meta: { model: "m", promptVersion: "review.v1", latencyMs: 1, calls: 1, validationRetries: 0 },
+  meta: { model: "m", promptVersion: "review.v1", latencyMs: 1, calls: 1, validationRetries: 0, lintLatencyMs: 0 },
+  linter: { findings: [], diagnostics: [], latencyMs: 0 },
 };
 
 describe("POST /api/review", () => {

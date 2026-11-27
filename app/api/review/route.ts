@@ -68,7 +68,9 @@ export async function POST(request: Request) {
     const { meta, dropped } = result;
     console.info(
       `[review] ${sources.length} file(s), ${result.review.findings.length} finding(s) kept, ${dropped.length} dropped ` +
-        `(${dropped.map((d) => d.reason).join(", ") || "none"}), ${meta.calls} call(s), ${meta.latencyMs} ms, ${meta.modelVersion ?? meta.model}`,
+        `(${dropped.map((d) => d.reason).join(", ") || "none"}), ${result.linter.findings.length} linter finding(s), ` +
+        `${result.linter.diagnostics.length} lint diagnostic(s), ${meta.lintLatencyMs} ms lint, ` +
+        `${meta.calls} call(s), ${meta.latencyMs} ms, ${meta.modelVersion ?? meta.model}`,
     );
     return Response.json(result);
   } catch (error) {

@@ -1,6 +1,7 @@
 import { annotate } from "./annotate";
-import { MODEL, PROMPT_VERSION } from "./config";
+import { MODEL, PROMPT_VERSION, REVIEW_TIMEOUT_MS } from "./config";
 import { generateReview, type GenerateOptions } from "./gemini";
+import { lintFiles, type LinterRun } from "./linter";
 import { postprocess, type DroppedFinding } from "./postprocess";
 import { buildPrompt, type LinterFinding } from "./prompt";
 import type { Review } from "./schema";
@@ -27,32 +28,48 @@ export type ReviewMeta = {
   calls: number;
   /** 1 if the first response failed validation and was asked for again. */
   validationRetries: number;
+  lintLatencyMs: number;
 };
 
-export type ReviewResult = { review: Review; dropped: DroppedFinding[]; meta: ReviewMeta };
+export type ReviewResult = { review: Review; dropped: DroppedFinding[]; meta: ReviewMeta; linter: LinterRun };
 
 export async function reviewFiles(files: ReviewInputFile[], options: ReviewOptions = {}): Promise<ReviewResult> {
-  const started = Date.now();
+  const now = options.gemini?.now ?? Date.now;
+  const started = now();
+  const deadline = started + (options.gemini?.timeoutMs ?? REVIEW_TIMEOUT_MS);
   const { annotatedDiff, addedLines } = annotate(files);
-  const prompt = buildPrompt({ annotatedDiff, change: options.change, linter: options.linter });
-  const { review: raw, calls, validationRetries, modelVersion } = await generateReview(prompt, options.gemini);
-  const { review, dropped } = postprocess(raw, addedLines);
+  const lintRun = await lintFiles(files, { deadline, now });
+  const linterFindings = mergeLinterFindings(lintRun.findings, options.linter ?? []);
+  const prompt = buildPrompt({ annotatedDiff, change: options.change, linter: linterFindings });
+  const { review: raw, calls, validationRetries, modelVersion } = await generateReview(prompt, options.gemini, deadline);
+  const { review, dropped } = postprocess(raw, addedLines, linterFindings);
 
   return {
     review,
     dropped,
+    linter: { ...lintRun, findings: linterFindings },
     meta: {
       model: MODEL,
       modelVersion,
       promptVersion: PROMPT_VERSION,
-      latencyMs: Date.now() - started,
+      latencyMs: now() - started,
       calls,
       validationRetries,
+      lintLatencyMs: lintRun.latencyMs,
     },
   };
+}
+
+function mergeLinterFindings(...groups: LinterFinding[][]) {
+  const findings = new Map<string, LinterFinding>();
+  for (const finding of groups.flat()) {
+    findings.set(JSON.stringify([finding.file, finding.line, finding.rule, finding.message]), finding);
+  }
+  return [...findings.values()];
 }
 
 export { ReviewError, type ReviewErrorCode } from "./gemini";
 export type { DroppedFinding, DropReason } from "./postprocess";
 export type { LinterFinding } from "./prompt";
+export type { LinterDiagnostic, LinterRun } from "./linter";
 export type { Finding, Review } from "./schema";
