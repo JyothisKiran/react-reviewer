@@ -6,6 +6,7 @@ import type { ReviewResult } from "@/lib/review";
 import { SEVERITIES, type Severity } from "@/lib/review/constants";
 import { countBySeverity, groupByFile, humanize, SEVERITY_LABEL } from "@/lib/review/format";
 import { FindingCard } from "./FindingCard";
+import { LinterResults } from "./LinterResults";
 import { ModelText } from "./ModelText";
 import { SeverityBadge } from "./SeverityBadge";
 
@@ -15,6 +16,7 @@ type Props = { result: ReviewResult; files: SourceFile[] };
 
 export function ReviewResults({ result, files }: Props) {
   const { review, dropped } = result;
+  const hasLinterOutput = result.linter.findings.length > 0 || result.linter.diagnostics.length > 0;
   const [hidden, setHidden] = useState<ReadonlySet<Severity>>(new Set());
 
   const counts = countBySeverity(review.findings);
@@ -58,7 +60,9 @@ export function ReviewResults({ result, files }: Props) {
 
       {review.findings.length === 0 ? (
         <section aria-labelledby="no-issues-heading" className="rounded-lg border border-rule bg-paper p-5">
-          <h3 id="no-issues-heading" className="text-lg font-bold">No issues found</h3>
+          <h3 id="no-issues-heading" className="text-lg font-bold">
+            {hasLinterOutput ? "No model findings" : "No issues found"}
+          </h3>
           <p className="mt-1 text-ink/70">The reviewer found nothing in these files that needs changing.</p>
         </section>
       ) : (
@@ -104,6 +108,8 @@ export function ReviewResults({ result, files }: Props) {
           )}
         </section>
       )}
+
+      <LinterResults findings={result.linter.findings} diagnostics={result.linter.diagnostics} />
 
       {dropped.length > 0 && (
         <p className="text-sm text-ink/70">
